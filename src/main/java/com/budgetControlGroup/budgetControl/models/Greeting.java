@@ -1,4 +1,4 @@
-package com.budgetControlGroup.budgetControl.testController;
+package com.budgetControlGroup.budgetControl.models;
 
 
 public class Greeting {
