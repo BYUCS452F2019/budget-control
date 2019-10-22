@@ -89,11 +89,11 @@ public class CreateDummyData {
     }
     private void insertData(Connection conn) {
         try {
-            String createUsers = buildCreateUsersStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyUsers.txt");
-            String createBudgets = buildCreateBudgetStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyBudgets.txt");
-            String createCategories = buildCreateCategoryStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyCategories.txt");
-            String createBudgetItems = buildCreateBudgetItemStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyBudgetItems.txt");
-            String createTransactions = buildCreateTransactionStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyTransactions.txt");
+            String createUsers = buildCreateUsersStatementFromFile("/home/ubuntu/git/budget-control/src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyUsers.txt");
+            String createBudgets = buildCreateBudgetStatementFromFile("/home/ubuntu/git/budget-control/src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyBudgets.txt");
+            String createCategories = buildCreateCategoryStatementFromFile("/home/ubuntu/git/budget-control/src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyCategories.txt");
+            String createBudgetItems = buildCreateBudgetItemStatementFromFile("/home/ubuntu/git/budget-control/src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyBudgetItems.txt");
+            String createTransactions = buildCreateTransactionStatementFromFile("/home/ubuntu/git/budget-control/src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyTransactions.txt");
 
             Statement stmt = conn.createStatement();
             //Order matters in the execution of the insert statements below

@@ -11,7 +11,7 @@ public class CreateTablesScript {
     private final String password = "jmcBudget452";
 
     /* --- START OF TABLE CREATION STRINGS --- */
-    private final String table_drop = "DROP TABLE IF EXISTS transaction, budget_item, category, budget, users CASCADE;";
+    private final String table_drop = "DROP TABLE IF EXISTS transaction, budget_item, categories, budget, users CASCADE;";
     private final String create_user = "CREATE TABLE IF NOT EXISTS users (" +
             "user_id SERIAL PRIMARY KEY, " +
             "first_name VARCHAR(25), " +
