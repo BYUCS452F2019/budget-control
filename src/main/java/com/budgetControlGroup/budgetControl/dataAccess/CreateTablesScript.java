@@ -1,9 +1,6 @@
 package com.budgetControlGroup.budgetControl.dataAccess;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CreateTablesScript {
     private final String url = "jdbc:postgresql://localhost/budgetcontrol";
@@ -66,7 +63,7 @@ public class CreateTablesScript {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connected successfully!");
         } catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return conn;
     }

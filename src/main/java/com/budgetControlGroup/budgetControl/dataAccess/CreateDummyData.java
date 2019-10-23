@@ -83,17 +83,17 @@ public class CreateDummyData {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connected successfully!");
         } catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return conn;
     }
     private void insertData(Connection conn) {
         try {
-            String createUsers = buildCreateUsersStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyUsers.txt");
-            String createBudgets = buildCreateBudgetStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyBudgets.txt");
-            String createCategories = buildCreateCategoryStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyCategories.txt");
-            String createBudgetItems = buildCreateBudgetItemStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyBudgetItems.txt");
-            String createTransactions = buildCreateTransactionStatementFromFile("src\\main\\java\\com\\budgetControlGroup\\budgetControl\\dataAccess\\dummyTransactions.txt");
+            String createUsers = buildCreateUsersStatementFromFile("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyUsers.txt");
+            String createBudgets = buildCreateBudgetStatementFromFile("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyBudgets.txt");
+            String createCategories = buildCreateCategoryStatementFromFile("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyCategories.txt");
+            String createBudgetItems = buildCreateBudgetItemStatementFromFile("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyBudgetItems.txt");
+            String createTransactions = buildCreateTransactionStatementFromFile("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyTransactions.txt");
 
             Statement stmt = conn.createStatement();
             //Order matters in the execution of the insert statements below
@@ -108,7 +108,7 @@ public class CreateDummyData {
             System.out.println("Inserted Data!!");
         }
         catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.err.println(ex.getMessage());
         }
         catch (Exception e){
             System.out.println(e.getMessage());
