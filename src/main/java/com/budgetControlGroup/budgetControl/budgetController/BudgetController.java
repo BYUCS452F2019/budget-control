@@ -2,11 +2,14 @@ package com.budgetControlGroup.budgetControl.budgetController;
 
 import com.budgetControlGroup.budgetControl.Models.Budget;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+@RequestMapping("/budget")
 
 @RestController
 public class BudgetController {
@@ -15,7 +18,7 @@ public class BudgetController {
     private final String user = "postgres";
     private final String password = "jmcBudget452";
 
-    @RequestMapping("/budget")
+    @RequestMapping(value = "")
     public List<Budget> budget() {
         List<Budget> result = new ArrayList<>();
         try {
@@ -33,7 +36,34 @@ public class BudgetController {
                         resultSet.getString("total_expense"),
                         resultSet.getString("description")));
             }
+            connection.close();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
 
+        return result;
+    }
+
+    @RequestMapping(value = "/id")
+    public Budget singleBudget(@RequestParam(value="budget_id", defaultValue="1") String budget_id) {
+        Budget result = null;
+        String query = "SELECT * FROM Budget WHERE budget_id = %s;";
+
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format(query, budget_id));
+
+            if (resultSet.next()) {
+                result = new Budget(resultSet.getInt("budget_id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("start_date"),
+                        resultSet.getString("end_date"),
+                        resultSet.getString("total_income"),
+                        resultSet.getString("total_expense"),
+                        resultSet.getString("description"));
+            }
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
