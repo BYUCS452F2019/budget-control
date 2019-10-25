@@ -1,0 +1,8 @@
+<input #budget_id type="text" placeholder="Budget Id">
+<br>
+<button (click)=getBudget(budget_id.value)>GET BUDGET</button>
+
+<div *ngIf="budget">
+    <p>budget.name</p>
+</div>
+

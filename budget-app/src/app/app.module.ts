@@ -4,12 +4,12 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GreetingPageComponent } from './greeting-page/greeting-page.component';
+import { BudgetViewComponent } from './budget-view/budget-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GreetingPageComponent
+    BudgetViewComponent
   ],
   imports: [
     BrowserModule,

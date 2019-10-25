@@ -1,4 +1,4 @@
-export class Greeting {
+export class Budget {
     id: number;
     content: String;
 }
