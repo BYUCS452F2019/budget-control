@@ -17,9 +17,8 @@ export class BudgetViewComponent implements OnInit {
   }
 
   getBudget(budget_id: string): void {
-    console.log("called with " + budget_id)
     this.budgetService.getBudget(budget_id)
-        .subscribe(budget => this.budget = budget);
+        .subscribe(result => this.budget = result);
   }
 
 }
