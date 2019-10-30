@@ -1,0 +1,23 @@
+<h1>{{title}}</h1>
+<input type="button" value="Add Transaction" (click) = "addTransaction()">
+<h2>User Transactions: </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Budget</th>
+      <th>Date</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{transaction.budget_name}}</td>
+      <td>{{transaction.date}}</td>
+      <td>{{transaction.cat_name}}</td>
+      <td>{{transaction.amount}}</td>
+      <td id="desc">{{transaction.description}}</td>
+    </tr>
+  </tbody>
+</table>
