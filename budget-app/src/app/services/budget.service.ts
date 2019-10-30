@@ -12,10 +12,15 @@ export class BudgetService {
   // serverUrl: string = 'https://cors-anywhere.herokuapp.com/' +
   //                     'http://ec2-18-191-122-27.us-east-2.compute.amazonaws.com:8080/greeting?name='
 
-  serverUrl: string = 'http://localhost:8080/budget/id?budget_id='
+  budgetIdUrl: string = 'http://localhost:8080/budget/id?budget_id='
+  userIdUrl: string = 'http://localhost:8080/budget/user_id?user_id='
   constructor(private http: HttpClient) { }
 
   getBudget(budget_id: string): Observable<Budget> {
-    return this.http.get<Budget>(this.serverUrl.concat(budget_id));
+    return this.http.get<Budget>(this.budgetIdUrl.concat(budget_id));
+  }
+
+  getBudgetByUserId(user_id: string): Observable<Budget> {
+    return this.http.get<Budget>(this.userIdUrl.concat(user_id))
   }
 }

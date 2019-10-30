@@ -1,6 +1,6 @@
-<input #budget_id type="text" placeholder="Budget Id">
+<input #user_id type="text" placeholder="User Id">
 <br>
-<button (click)=getBudget(budget_id.value)>GET BUDGET</button>
+<button (click)=getBudget(user_id.value)>GET BUDGET</button>
 
 <div *ngIf="budget" class="budget-view">
     <h1>{{budget.name}}</h1>

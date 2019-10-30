@@ -71,6 +71,33 @@ public class BudgetController {
         return result;
     }
 
+    @RequestMapping(value = "/user_id")
+    public Budget bugetByUserId(@RequestParam(value="user_id") String user_id) {
+        Budget result = null;
+        String query = "SELECT * FROM Budget WHERE user_id = %s;";
+
+        try {
+            Connection connection = connect();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(String.format(query, user_id));
+
+            if (resultSet.next()) {
+                result = new Budget(resultSet.getInt("budget_id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("start_date"),
+                        resultSet.getString("end_date"),
+                        resultSet.getString("total_income"),
+                        resultSet.getString("total_expense"),
+                        resultSet.getString("description"));
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        return result;
+    }
+
     private Connection connect(){
         Connection conn = null;
         try{

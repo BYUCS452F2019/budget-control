@@ -16,8 +16,8 @@ export class BudgetViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  getBudget(budget_id: string): void {
-    this.budgetService.getBudget(budget_id)
+  getBudget(user_id: string): void {
+    this.budgetService.getBudgetByUserId(user_id)
         .subscribe(result => this.budget = result);
   }
 
