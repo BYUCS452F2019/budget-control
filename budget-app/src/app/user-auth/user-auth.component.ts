@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../classes/user';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-user-auth',
@@ -8,10 +10,16 @@ import { Component, OnInit } from '@angular/core';
 
 export class UserAuthComponent implements OnInit {
 
-  userInfo = "info"
+  user:User;
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSubmit(f: NgForm): void {
+    
+    console.log(f )
+    // this.budgetService.getBudgetByUserId(user_id)
+    //     .subscribe(result => this.budget = result);
+  }
 }

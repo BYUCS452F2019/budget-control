@@ -1,5 +1,10 @@
+<<<<<<< HEAD:src/main/java/com/budgetControlGroup/budgetControl/controllers/BasicController.java
 package com.budgetControlGroup.budgetControl.controllers;
 //
+=======
+package com.budgetControlGroup.budgetControl.testController;
+
+>>>>>>> initial-budget-page:src/main/java/com/budgetControlGroup/budgetControl/testController/BasicController.java
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.budgetControlGroup.budgetControl.models.Greeting;
