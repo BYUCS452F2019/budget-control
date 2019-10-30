@@ -13,16 +13,20 @@ import { BudgetCreateComponent } from './budget-create/budget-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule } from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { UserAuthComponent } from './user-auth/user-auth.component';
 
 const appRoutes: Routes = [
   { path: 'budget', component: BudgetViewComponent },
-  { path: 'transaction', component: TransactionViewComponent }
+  { path: 'transaction', component: TransactionViewComponent },
+  { path:'', component:UserAuthComponent}
+
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     BudgetViewComponent,
+    UserAuthComponent,
     TransactionViewComponent,
     AddTransactionViewComponent,
     BudgetCreateComponent
