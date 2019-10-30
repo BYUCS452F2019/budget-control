@@ -6,15 +6,24 @@ import { RouterModule, Routes } from '@angular/router'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BudgetViewComponent } from './budget-view/budget-view.component';
+import { TransactionViewComponent } from './transaction-view/transaction-view.component';
+import { MatDialogModule } from '@angular/material'
+import { AddTransactionViewComponent } from './transaction-view/add-transaction-view.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule, MatInputModule } from '@angular/material'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 const appRoutes: Routes = [
-  { path: 'budget', component: BudgetViewComponent}
+  { path: 'budget', component: BudgetViewComponent },
+  { path: 'transaction', component: TransactionViewComponent }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    BudgetViewComponent
+    BudgetViewComponent,
+    TransactionViewComponent,
+    AddTransactionViewComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +31,16 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(
       appRoutes
-    )
+    ),
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    AddTransactionViewComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

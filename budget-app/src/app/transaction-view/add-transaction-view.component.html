@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Record Transaction</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field>
+    <input matInput
+           placeholder="BudgetID"
+           formControlName="budget_id">
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="save()">Add Transaction</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button (click)="close()">Cancel</button>
+</mat-dialog-actions>
