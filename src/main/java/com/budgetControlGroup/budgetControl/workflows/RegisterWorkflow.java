@@ -2,43 +2,45 @@ package com.budgetControlGroup.budgetControl.workflows;
 
 import com.budgetControlGroup.budgetControl.database.PostgresConnection;
 import com.budgetControlGroup.budgetControl.models.User;
+import com.budgetControlGroup.budgetControl.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 
 @Service
 public class RegisterWorkflow {
   private PostgresConnection postgresConnection;
-
+  private UserUtils checkUserExistence;
 
 
   @Autowired
-  public RegisterWorkflow(PostgresConnection postgresConnection) {
+  public RegisterWorkflow(PostgresConnection postgresConnection, UserUtils checkUserExistence) {
     this.postgresConnection = postgresConnection;
+    this.checkUserExistence = checkUserExistence;
   }
 
-  public Integer register(User user, String password) {
-    if(exists(user.getUsername())) {
-      return -1;
+  public User register(User user) {
+    if(checkUserExistence.exists(user.getUsername())) {
+      throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"User already exists");
     }
-
-    return insert(user,password);
+    user.setUserId(insert(user));
+    return user;
   }
 
-  private int insert(User user, String password) {
+  private int insert(User user) {
     Connection c = postgresConnection.getConnection();
     String q1 = "insert into userid values('" +user.getFirstName()+ "', '" +
         user.getLastName()+ "', '" +
         user.getEmail()+ "', '" +
         user.getUsername()+ "', '" +
-        password+ "', '" +
+        user.getPassword()+ "', '" +
         Calendar.getInstance().getTime()+ "', '"  +
         Calendar.getInstance().getTime()+ "');";
     String q2 = "SELECT SCOPE_IDENTITY();";
@@ -71,22 +73,5 @@ public class RegisterWorkflow {
     }
   }
 
-  private boolean exists(String username) {
-    Connection c = postgresConnection.getConnection();
 
-    String userExists = "Select 1 " +
-        "From users u" +
-        "Where u.username = '"+username+"'";
-    try {
-      Statement stmt = null;
-      stmt = c.createStatement();
-      ResultSet rs = stmt.executeQuery(userExists);
-      stmt.close();
-      c.close();
-      return rs.next();
-    }
-    catch (SQLException ex) {
-      throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
 }

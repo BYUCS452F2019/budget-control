@@ -1,9 +1,10 @@
 package com.budgetControlGroup.budgetControl.database;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.springframework.web.client.HttpServerErrorException;
+
+import java.sql.*;
 
 @Service
 public class PostgresConnection {
@@ -27,7 +28,23 @@ public class PostgresConnection {
     return conn;
   }
 
+  boolean isConnected() {
+    String connect = "Select 1 " ;
+    try {
+      Statement stmt = null;
+      stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery(connect);
+    }
+    catch (SQLException ex) {
+      return false;
+    }
+    return true;
+  }
+
   public Connection getConnection() {
+    if(!isConnected()) {
+      connect();
+    }
     return connection;
   }
 }
