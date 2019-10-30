@@ -7,8 +7,5 @@ start_date: string;
 total_expense: string;
 total_income: string;
 user_id: number;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> html done for budget create page
+
