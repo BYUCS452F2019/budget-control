@@ -1,0 +1,44 @@
+<h1 id="Title">Create Your Own Customized Budget</h1>
+<body>
+
+	<div id="budgetCreateDiv">
+
+		<form>
+
+		Budget Name				: 	<input type="text" 		#budgetName 			placeholder="Christmas Budget"><br>
+		<br>
+		Budget Description		: 	<input type="text" 		#budgetDescr 		 	placeholder="Money set aside for neighbor Christmas gifts..."><br>
+		<br>
+		Start Date				: 	<input type="date" 		#startDate	 			placeholder=""><br>
+		<br>
+		End Date				: 	<input type="date" 		#endDate 				placeholder=""><br>
+		<br>
+		Total Expected Income	: 	<input type="number" 	#totalIn 				placeholder=""><br>
+		<br>
+		Total Expected Expense	: 	<input type="number" 	#totalOut	 			placeholder=""><br>
+		<br>
+		<div id ="dynamicDiv">
+			<ul id="fieldList">
+		    <li>
+		      <input class="name_list" name="cat_name[]" type="text" placeholder="Category Name" />
+		    </li>
+		    <!-- <li>
+		      <input class="income_list" name="cat_income[]" type="number" placeholder="Expected Income" />
+		    </li> -->
+		    <li>
+		      <input class="expense_list" name="cat_expense[]" type="number" placeholder="Expected Expense">
+		    </li>
+		  </ul>
+			<br>
+		</div>
+	  <button id="addMoreButton" (click)="addMore($event)">Create Another Category</button>
+
+		<br>
+		<br>
+	<!--	<button type="submit" (click)='printValues(budgetName.value, budgetDescr.value, startDate.value, endDate.value, totalIn.value, totalOut.value)'>Create</button> -->
+		<button (click)="createBudget(budgetName.value, budgetDescr.value, startDate.value, endDate.value, totalIn.value, totalOut.value)">Create Budget</button>
+		</form>
+
+	</div>
+
+</body>

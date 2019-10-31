@@ -8,3 +8,4 @@ total_expense: string;
 total_income: string;
 user_id: number;
 }
+
