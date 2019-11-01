@@ -1,5 +1,15 @@
+<br><br>
+<h2>Add Transaction: </h2>
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+  <input placeholder="BudgetId" formControlName="budget_id"  />
+  <input placeholder="CategoryId" formControlName="cat_id" />
+  <input placeholder="Amount" formControlName="amount"/>
+  <input placeholder="Date" formControlName="date"/>
+  <input placeholder="Description" formControlName="description"/><br>
+  <button type="submit">Add Transaction</button>
+  <button type="reset" (click)="revert()">Clear</button>
+</form>
 
-<input type="button" value="Add Transaction" (click) = "addTransaction()">
 <h2>User Transactions: </h2>
 <table>
   <thead>
