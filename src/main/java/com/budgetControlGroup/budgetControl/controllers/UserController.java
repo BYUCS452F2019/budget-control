@@ -1,6 +1,6 @@
 package com.budgetControlGroup.budgetControl.controllers;
 
-import com.budgetControlGroup.budgetControl.models.User;
+import com.budgetControlGroup.budgetControl.Models.User;
 import com.budgetControlGroup.budgetControl.workflows.LoginWorkflow;
 import com.budgetControlGroup.budgetControl.workflows.RegisterWorkflow;
 import org.springframework.beans.factory.annotation.Autowired;
