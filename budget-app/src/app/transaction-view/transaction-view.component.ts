@@ -3,6 +3,8 @@ import { Transaction } from '../classes/transaction';
 import { TransactionService } from '../services/transaction.service';
 import { AddTransactionViewComponent } from '../transaction-view/add-transaction-view.component'
 import { MatDialog, MatDialogConfig } from '@angular/material'
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { TransactionRequest } from '../classes/transactionRequest';
 
 @Component({
   selector: 'app-transaction-view',
@@ -12,8 +14,29 @@ import { MatDialog, MatDialogConfig } from '@angular/material'
 
 export class TransactionViewComponent implements OnInit {
   transactions: Transaction[];
+  transaction: TransactionRequest;
+  addForm: FormGroup;
 
-  constructor(private transactionService: TransactionService, private dialog: MatDialog) {}
+  constructor(private transactionService: TransactionService, private formBuilder: FormBuilder) {
+    this.addForm = formBuilder.group({
+                     budget_id: '',
+                     cat_id: '',
+                     amount: '',
+                     date: '',
+                     description: ''
+                   });
+  }
+
+  onSubmit(){
+    console.log(this.addForm.value);
+    this.transaction = this.addForm.value;
+    this.addRealTransaction(this.transaction);
+    this.revert();
+  }
+
+  revert(){
+    this.addForm.reset();
+  }
 
   ngOnInit(){
     this.getTransactions('1'); //Default user_id
@@ -24,13 +47,8 @@ export class TransactionViewComponent implements OnInit {
       .subscribe(result => this.transactions = result);
   }
 
-  addTransaction(): void {
-    console.log('Called addTransaction method!!!');
-    let dialogRef = this.dialog.open(AddTransactionViewComponent, new MatDialogConfig());
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: ${result}');
-    })
-
+  addRealTransaction(transaction: TransactionRequest): void {
+    this.transactionService.addTransaction(transaction)
+      .subscribe(result => console.log(result));
   }
 }
