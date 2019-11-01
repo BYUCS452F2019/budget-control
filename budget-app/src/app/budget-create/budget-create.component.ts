@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
 import { BudgetCreateService } from '../services/create_budget.service';
-import { MatDialog, MatDialogConfig } from '@angular/material'
 import * as uuid from 'uuid';
 
 
@@ -12,7 +11,7 @@ import * as uuid from 'uuid';
 })
 export class BudgetCreateComponent implements OnInit {
   result_budget: Budget;
-  constructor(private budgetCreateService: BudgetCreateService, private dialog: MatDialog) { }
+  constructor(private budgetCreateService: BudgetCreateService) { }
 
   ngOnInit() {
   }
