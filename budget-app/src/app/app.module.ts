@@ -18,8 +18,8 @@ import { UserAuthComponent } from './user-auth/user-auth.component';
 const appRoutes: Routes = [
   { path: 'budget', component: BudgetViewComponent },
   { path: 'transaction', component: TransactionViewComponent },
-  { path:'', component:UserAuthComponent}
-
+  { path: '', component:UserAuthComponent },
+  { path: 'createBudget', component: BudgetCreateComponent }
 ]
 
 @NgModule({
