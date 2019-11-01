@@ -1,4 +1,4 @@
-package com.budgetControlGroup.budgetControl.Models;
+package com.budgetControlGroup.budgetControl.models;
 
 public class Transaction {
     private int transaction_id;

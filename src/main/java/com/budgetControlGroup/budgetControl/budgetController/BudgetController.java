@@ -1,6 +1,6 @@
 package com.budgetControlGroup.budgetControl.budgetController;
 
-import com.budgetControlGroup.budgetControl.Models.Budget;
+import com.budgetControlGroup.budgetControl.models.Budget;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

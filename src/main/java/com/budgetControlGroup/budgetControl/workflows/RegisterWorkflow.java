@@ -27,6 +27,7 @@ public class RegisterWorkflow {
   }
 
   public User register(User user) {
+    System.out.println(user);
     if(checkUserExistence.exists(user.getUsername())) {
       throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"User already exists");
     }

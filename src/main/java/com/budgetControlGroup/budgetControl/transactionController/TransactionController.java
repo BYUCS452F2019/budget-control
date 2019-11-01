@@ -1,6 +1,6 @@
 package com.budgetControlGroup.budgetControl.transactionController;
 
-import com.budgetControlGroup.budgetControl.Models.Transaction;
+import com.budgetControlGroup.budgetControl.models.Transaction;
 import com.budgetControlGroup.budgetControl.dataAccess.TransactionDAO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/transaction")

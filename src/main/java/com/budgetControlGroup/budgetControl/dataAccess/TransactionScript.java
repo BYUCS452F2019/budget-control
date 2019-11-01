@@ -1,8 +1,7 @@
 package com.budgetControlGroup.budgetControl.dataAccess;
 
-import com.budgetControlGroup.budgetControl.Models.Transaction;
+import com.budgetControlGroup.budgetControl.models.Transaction;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 

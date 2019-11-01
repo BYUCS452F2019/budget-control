@@ -1,26 +1,26 @@
 <div id="authBox" >
     <h1 id="loginHeader">Login</h1>
     <form >
-        <input type="text"  name="Username" placeholder="Username"/>
+        <input type="text" #userName  name="Username" placeholder="Username"/>
         <br>
-        <input type="password" name="Password" placeholder="Password"/>
+        <input type="password" #password  name="Password" placeholder="Password"/>
         <br>
-        <input type="submit" value="Login" (click)="login()"/>
+        <input type="submit" value="Login" (click)="login(userName.value,password.value)"/>
     </form>
 
     <h1 id="registerHeader">Register</h1>
     <form>
-        <input type="text"  placeholder="First Name"/>
+        <input type="text" #firstName  placeholder="First Name"/>
         <br>
-        <input type="text" placeholder="Last Name"/>
+        <input type="text" #lastName placeholder="Last Name"/>
         <br>
-        <input type="text"  placeholder="Email"/>
+        <input type="text" #email placeholder="Email"/>
         <br>
-        <input type="text" placeholder="Username"/>
+        <input type="text" #regUsername placeholder="Username"/>
         <br>
-        <input type="password" placeholder="Password"/>
+        <input type="password" #regPassword placeholder="Password"/>
         <br>
-        <input type="submit"/>
+        <input type="submit" value="Register" (click)="register(firstName.value,lastName.value,email.value,regUsername.value,regPassword.value)"/>
     </form>
 </div>
 
