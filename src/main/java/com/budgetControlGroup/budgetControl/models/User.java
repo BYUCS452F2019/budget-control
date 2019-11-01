@@ -1,4 +1,4 @@
-package com.budgetControlGroup.budgetControl.models;
+package com.budgetControlGroup.budgetControl.Models;
 
 import java.util.Date;
 
