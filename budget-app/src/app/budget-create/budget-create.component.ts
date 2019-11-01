@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
+import { BudgetCreateService } from '../services/create_budget.service';
+import { MatDialog, MatDialogConfig } from '@angular/material'
 import * as uuid from 'uuid';
 
 
@@ -9,8 +11,8 @@ import * as uuid from 'uuid';
   styleUrls: ['./budget-create.component.css']
 })
 export class BudgetCreateComponent implements OnInit {
-
-  constructor() { }
+  result_budget: Budget;
+  constructor(private budgetCreateService: BudgetCreateService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -74,6 +76,9 @@ export class BudgetCreateComponent implements OnInit {
   sendBudget(this, budget_obj: Budget): void {
     console.log("----in sendBudget Method----")
     console.log(budget_obj);
+    this.budgetCreateService.createBudget(budget_obj)
+      .subscribe(result => this.result_budget = result);
+    console.log("after subscribe");
     return;
   }
 
