@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../classes/transaction';
 import { TransactionService } from '../services/transaction.service';
-import { AddTransactionViewComponent } from '../transaction-view/add-transaction-view.component'
-import { MatDialog, MatDialogConfig } from '@angular/material'
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms'
 import { TransactionRequest } from '../classes/transactionRequest';
 
