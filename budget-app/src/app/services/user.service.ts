@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../classes/user'
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, RequestOptions } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class UserService {
   register(user:User): Observable<User> {
     let result = this.http.put<User>(this.registerURI,user);
     console.log(result);
-    
+
     return result
   }
 }

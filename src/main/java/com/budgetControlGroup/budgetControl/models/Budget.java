@@ -1,4 +1,4 @@
-package com.budgetControlGroup.budgetControl.models;
+package com.budgetControlGroup.budgetControl.Models;
 
 public class Budget {
     private int budget_id;
