@@ -1,7 +1,7 @@
 package com.budgetControlGroup.budgetControl.controllers;
 
 import com.budgetControlGroup.budgetControl.Models.Budget;
-import com.budgetControlGroup.budgetControl.models.User;
+import com.budgetControlGroup.budgetControl.Models.User;
 import com.budgetControlGroup.budgetControl.workflows.BudgetCreateWorkflow;
 import com.budgetControlGroup.budgetControl.workflows.LoginWorkflow;
 import com.budgetControlGroup.budgetControl.workflows.RegisterWorkflow;

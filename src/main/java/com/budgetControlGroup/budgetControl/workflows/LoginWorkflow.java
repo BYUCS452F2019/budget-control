@@ -1,7 +1,7 @@
 package com.budgetControlGroup.budgetControl.workflows;
 
 import com.budgetControlGroup.budgetControl.database.PostgresConnection;
-import com.budgetControlGroup.budgetControl.models.User;
+import com.budgetControlGroup.budgetControl.Models.User;
 import com.budgetControlGroup.budgetControl.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
