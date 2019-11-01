@@ -4,7 +4,6 @@ import com.budgetControlGroup.budgetControl.Models.Transaction;
 import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
 import com.budgetControlGroup.budgetControl.Models.TransactionResult;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 

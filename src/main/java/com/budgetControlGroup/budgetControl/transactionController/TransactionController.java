@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.jws.WebMethod;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/transaction")
