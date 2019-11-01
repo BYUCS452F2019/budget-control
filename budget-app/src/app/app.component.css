@@ -12,8 +12,8 @@ li {
     float: left;
 }
   
-  a {
+a {
     display: block;
     padding: 8px;
-    background-color: #dddddd;
+		color: blue;
 }
