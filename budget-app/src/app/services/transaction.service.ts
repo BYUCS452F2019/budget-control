@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Transaction } from '../classes/transaction'
+import { TransactionRequest } from '../classes/transactionRequest'
+import { TransactionResult } from '../classes/transactionResult'
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -7,10 +9,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TransactionService {
-  serverUrl: string = 'http://localhost:8080/transaction/id?user_id='
+  getServerUrl: string = 'http://localhost:8080/transaction/id?user_id='
+  postServerUrl: string = 'http://localhost:8080/transaction/add?budget_id='
   constructor(private http: HttpClient) {}
 
   getTransactions(user_id: string): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(this.serverUrl.concat(user_id));
+    return this.http.get<Transaction[]>(this.getServerUrl.concat(user_id));
+  }
+
+  addTransaction(transaction: TransactionRequest): Observable<TransactionResult> {
+    return this.http.get<TransactionResult>(this.postServerUrl.concat(transaction.budget_id)
+      .concat('&cat_id=').concat(transaction.cat_id)
+      .concat('&amount=').concat(transaction.amount)
+      .concat('&date=').concat(transaction.date)
+      .concat('&description=').concat(transaction.description));
   }
 }
