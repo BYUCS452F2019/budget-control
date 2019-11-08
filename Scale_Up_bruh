@@ -1,0 +1,22 @@
+Explain how you will use one of the NoSQL database categories to prepare for use of you project at a large scale.
+
+Tell a story about how your application might grow too large for a relational database, 
+and which kind of NoSQL database you think would be best to use to handle the increased popularity.
+
+Each individual should submit this, and if you work together as a team the submissions might be the same. 
+But, feel free to put you own personal spin on what you think might happen with your application 
+and what your team should do to prepare for it.
+
+Scale up notes:
+Transactions would need to be the category that would be the most heavily used
+
+Story:
+Due to World War III breaking out in Egypt and Kenya, the world was in need of managing the money for the war.
+The U.S. government was floundering around not knowing how to handle its increase in spending. It needed a large-scale
+solution. They turned to the number one customizable budget company in the world, Budget Control. Our company
+now has billions of transactions to record and display for the expenses that have come due to the war effort. 
+At first, our relational database was under too much strain when it comes to reading and writing transactions 
+from the government. So, we transitioned to a NoSQL database to handle the increased traffic. 
+The category of our NoSQL database is a key-value / document database. We decided to use the DynamoDB 
+hosted by AWS. It is a key-value / document database format. We want to use key-value because of the speed
+and simplicity it provides. The document portion will provide flexibility to larger values that need to be stored.
