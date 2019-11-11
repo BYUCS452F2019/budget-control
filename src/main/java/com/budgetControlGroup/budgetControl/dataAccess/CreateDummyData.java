@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class CreateDummyData {
-    private final String url = "jdbc:postgresql://localhost/budgetcontrol";
+    private final String url = "jdbc:postgresql:budgetcontrol";
     private final String user = "postgres";
     private final String password = "jmcBudget452";
 
