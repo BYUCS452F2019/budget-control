@@ -5,7 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class CreateTablesScript {
-    private final String url = "jdbc:postgresql://localhost/budgetcontrol";
+    //private final String url = "jdbc:postgresql://localhost/budgetcontrol";
+	private final String url = "jdbc:postgresql:budgetcontrol";
     private final String user = "postgres";
 	private final String password = "jmcBudget452";
     
