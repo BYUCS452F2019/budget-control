@@ -1,12 +1,18 @@
-<input #user_id type="text" placeholder="User Id">
-<br>
-<button (click)=getBudget(user_id.value)>GET BUDGET</button>
+<div *ngIf="budget == undefined">
+    <input #user_id type="text" placeholder="User Id">
+    <br>
+    <button (click)=getBudget(user_id.value)>GET BUDGET</button>
+</div>
 
-<div *ngIf="budget" class="budget-view">
-    <h1>{{budget.name}}</h1>
-    <h2>{{budget.description}}</h2>
-    <h3>{{budget.start_date}} - {{budget.end_date}}</h3>
-    <h3>Expected Income: {{budget.total_income}}</h3>
-    <h3>Expected Expense: {{budget.total_expense}}</h3>
+<div *ngIf="budget">
+    <div class="budget-view">
+        <h1>{{budget.name}}</h1>
+        <h2>{{budget.description}}</h2>
+        <h3>Expected Income: {{budget.total_income}}</h3>
+        <h3>Income so far: ${{total_income.toFixed(2)}}</h3>
+        <h3>Expected Expense: {{budget.total_expense}}</h3>
+        <h3>Expense so far: ${{total_expense.toFixed(2)}}</h3>
+    </div>
+    <app-transaction-view #transactions></app-transaction-view>
 </div>
 

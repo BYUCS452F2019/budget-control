@@ -1,9 +1,3 @@
-.budget-view {
-    margin: auto;
-    width: 25%;
-    border: 5px dotted black;
-}
-
 .budget-view h1, h2, h3 {
     /* text-align: center; */
     padding: 4px;
