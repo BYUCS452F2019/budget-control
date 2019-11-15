@@ -8,7 +8,8 @@ import java.sql.*;
 
 @Service
 public class PostgresConnection {
-  private final String url = "jdbc:postgresql://localhost/budgetcontrol";
+  //private final String url = "jdbc:postgresql://localhost/budgetcontrol";
+  private final String url = "jdbc:postgresql:budgetcontrol";
   private final String user = "postgres";
   private final String password = "jmcBudget452";
   private final Connection connection;

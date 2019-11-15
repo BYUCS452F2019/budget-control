@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class BudgetController {
 
-    private String url = "jdbc:postgresql://localhost/budgetcontrol";
+    private String url = "jdbc:postgresql:budgetcontrol";
     private final String user = "postgres";
     private final String password = "jmcBudget452";
 
