@@ -10,10 +10,10 @@ import { TransactionViewComponent } from '../transaction-view/transaction-view.c
 })
 export class BudgetViewComponent implements OnInit {
 
-  @ViewChild('transactions', {static: false}) set content(content: ElementRef) {
+  @ViewChild('transactions', {static: false}) set content(content: TransactionViewComponent) {
     this.transactionView = content
   }
-  transactionView: ElementRef;
+  transactionView: TransactionViewComponent;
   budget: Budget;
   total_income: number = 0;
   total_expense: number = 0;
