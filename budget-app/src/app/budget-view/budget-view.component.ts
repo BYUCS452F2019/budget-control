@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { formatCurrency } from '@angular/common';
 import { Budget } from '../classes/budget';
 import { BudgetService } from '../services/budget.service';
 import { TransactionViewComponent } from '../transaction-view/transaction-view.component';
@@ -17,6 +18,8 @@ export class BudgetViewComponent implements OnInit {
   budget: Budget;
   total_income: number = 0;
   total_expense: number = 0;
+  income_display: string;
+  expense_display: string;
 
   constructor(private budgetService: BudgetService) { }
 
@@ -51,8 +54,8 @@ export class BudgetViewComponent implements OnInit {
       // There may be a better way to do this...
       setTimeout(() => {
         var totals: [number, number] = this.getTotals();
-        this.total_expense = totals[0];
-        this.total_income = totals[1];
+        this.income_display = formatCurrency(totals[0], 'en', '$', 'USD');
+        this.expense_display = formatCurrency(totals[1], 'en', '$', 'USD');
       })
     }
   }
