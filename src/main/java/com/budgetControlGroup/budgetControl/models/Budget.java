@@ -13,6 +13,7 @@ public class Budget {
 
     public Budget(int budget_id, String name, int user_id, String start_date,
                   String end_date, String total_income, String total_expense, String description) {
+        System.out.println("---Here in the Models.Budget NOT default constructor\n");
         this.budget_id = budget_id;
         this.name = name;
         this.user_id = user_id;
@@ -21,6 +22,9 @@ public class Budget {
         this.total_income = total_income;
         this.total_expense = total_expense;
         this.description = description;
+    }
+    public Budget() {
+        System.out.println("---Here in the Models.Budget default constructor\n");
     }
 
     public int getBudget_id() {
