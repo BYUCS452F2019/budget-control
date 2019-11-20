@@ -4,10 +4,12 @@ import { BudgetCreateService } from '../services/create_budget.service';
 import * as uuid from 'uuid';
 
 
+
 @Component({
   selector: 'app-budget-create',
   templateUrl: './budget-create.component.html',
   styleUrls: ['./budget-create.component.css']
+
 })
 export class BudgetCreateComponent implements OnInit {
   result_budget: Budget;
@@ -73,10 +75,14 @@ export class BudgetCreateComponent implements OnInit {
     console.log("----in sendBudget Method----")
     console.log(budget_obj);
     this.budgetCreateService.createBudget(budget_obj)
+<<<<<<< Updated upstream
       .subscribe(result => {
         this.result_budget = result;
         result = this.sendCat(category_list, category_expense, this.result_budget.user_id, this.result_budget.budget_id)
       });
+=======
+      .subscribe(result => console.log(result));
+>>>>>>> Stashed changes
     console.log("after subscribe");
     return;
   }
