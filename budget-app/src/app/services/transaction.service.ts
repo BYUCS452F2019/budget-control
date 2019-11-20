@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TransactionService {
-  getServerUrl: string = 'http://localhost:8080/transaction/id?user_id='
-  postServerUrl: string = 'http://localhost:8080/transaction/add?budget_id='
+  getServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/id?user_id='
+  postServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/add?budget_id='
   constructor(private http: HttpClient) {}
 
   getTransactions(user_id: string): Observable<Transaction[]> {
