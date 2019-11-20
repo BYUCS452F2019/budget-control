@@ -20,8 +20,8 @@ export class BudgetCreateComponent implements OnInit {
     var category_list = [];
     //var category_income = [];
     var category_expense = [];
-    const budget_id = uuid.v4();
-    const user_id = uuid.v4();
+    //const budget_id = uuid.v4();
+    //const user_id = uuid.v4();
     console.log(budget_id);
     console.log(user_id);
   	console.log(budgetName);
@@ -32,6 +32,8 @@ export class BudgetCreateComponent implements OnInit {
     console.log(totalOut);
 
     let budget_obj = new Budget();
+    var budget_id = 23;
+    var user_id = 3;
     budget_obj.budget_id = budget_id;
     budget_obj.description = budgetDescr;
     budget_obj.end_date = endDate;
@@ -41,7 +43,6 @@ export class BudgetCreateComponent implements OnInit {
     budget_obj.total_income = totalIn.toString();
     budget_obj.user_id = user_id;
 
-    console.log("Here are the category names\n");
     var cat_names = (document.getElementsByClassName("name_list") as HTMLCollectionOf<HTMLTextAreaElement>);
 
     for(var i=0; i<cat_names.length; i++) {
@@ -56,29 +57,37 @@ export class BudgetCreateComponent implements OnInit {
     //   category_income.push(incomes[i].value);
     // }
 
-    console.log("Here are the category expenses\n");
     var expenses = (document.getElementsByClassName("expense_list") as HTMLCollectionOf<HTMLTextAreaElement>);
     for(var i=0; i<expenses.length; i++) {
       //console.log(expenses[i].value);
       category_expense.push(expenses[i].value);
     }
 
-    console.log(category_list);
-    //console.log(category_income);
-    console.log(category_expense);
-
-    this.sendBudget(budget_obj);
+    this.sendBudget(budget_obj, category_list, category_expense);
+    //this.sendCat(category_list, category_expense, user_id, budget_id);
 
   	return;
   }
 
-  sendBudget(this, budget_obj: Budget): void {
+  sendBudget(this, budget_obj: Budget, category_list: string[], category_expense: string[]): void {
     console.log("----in sendBudget Method----")
     console.log(budget_obj);
     this.budgetCreateService.createBudget(budget_obj)
-      .subscribe(result => this.result_budget = result);
+      .subscribe(result => {
+        this.result_budget = result;
+        result = this.sendCat(category_list, category_expense, this.result_budget.user_id, this.result_budget.budget_id)
+      });
     console.log("after subscribe");
     return;
+  }
+
+  sendCat(this, category_list: string[], category_expense: string[], user_id: number, budget_id: number): void {
+    console.log("----in sendCat Method----")
+    console.log(category_list);
+    console.log(category_expense)
+    this.budgetCreateService.createCat(category_list, category_expense, user_id, budget_id)
+      .subscribe(result => this.result_ = result);
+    console.log("after subscribe");
   }
 
   addMore(e): void {
