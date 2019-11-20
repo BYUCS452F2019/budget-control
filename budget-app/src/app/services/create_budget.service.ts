@@ -7,7 +7,7 @@ import { Budget } from '../classes/budget';
   providedIn: 'root'
 })
 export class BudgetCreateService {
-  serverUrl: string = 'http://localhost:8080/budgetCreate'
+  serverUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budgetCreate'
   constructor(private http: HttpClient) {}
 
   createBudget(budget: Budget): Observable<Budget> {
