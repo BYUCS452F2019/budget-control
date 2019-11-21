@@ -1,5 +1,6 @@
 package com.budgetControlGroup.budgetControl.utils;
 
+import com.budgetControlGroup.budgetControl.dataAccess.DBConnection;
 import com.budgetControlGroup.budgetControl.database.PostgresConnection;
 import com.budgetControlGroup.budgetControl.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,41 +23,53 @@ public class UserUtils {
   }
 
   public boolean exists(String username, String password) {
-    Connection c = postgresConnection.getConnection();
+    Connection c = null;
+    try {
+      c = DBConnection.connect();
+    }catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
 
     String userExists = "Select * " +
-        "From users u" +
+        "From users u " +
         "Where u.username = '"+username+"' and u.password = '"+password+"'";
     try {
       Statement stmt = null;
       stmt = c.createStatement();
       ResultSet rs = stmt.executeQuery(userExists);
-
+      boolean next = rs.next();
       stmt.close();
       c.close();
-      return rs.next();
+      return next;
     }
     catch (SQLException ex) {
+      System.out.println(ex.getMessage());
       throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   public boolean exists(String username) {
-    Connection c = postgresConnection.getConnection();
+    Connection c = null;
+    try {
+      c = DBConnection.connect();
+    }catch(SQLException e){
+      System.out.println(e.getMessage());
+    }
 
     String userExists = "Select * " +
-        "From users u" +
+        "From users u " +
         "Where u.username = '"+username+"'";
     try {
       Statement stmt = null;
       stmt = c.createStatement();
       ResultSet rs = stmt.executeQuery(userExists);
-
+      boolean next = rs.next();
       stmt.close();
       c.close();
-      return rs.next();
+      return next;
     }
     catch (SQLException ex) {
+      System.out.println(ex.getMessage());
       throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -72,38 +85,35 @@ public class UserUtils {
   //            ");";
 
   public User getUser(String username, String password) {
-    Connection c = postgresConnection.getConnection();
+    Connection c = null;
+    try {
+      c = DBConnection.connect();
+    } catch(SQLException e){
+      System.out.println("Problem connecting");
+    }
 
     String userExists = "Select * " +
-        "From users u" +
+        "From users u " +
         "Where u.username = '"+username+"' and u.password = '"+password+"'";
     try {
       Statement stmt = null;
       stmt = c.createStatement();
       ResultSet rs = stmt.executeQuery(userExists);
-
+      rs.next();
+      User user = new User(rs.getInt(1),
+              rs.getString(5),
+              rs.getString(2),
+              rs.getString(3),
+              rs.getString(4),
+              rs.getDate(7),
+              rs.getDate(8),
+              null);
       stmt.close();
       c.close();
-      if(rs.next()) {
-        System.out.println(rs.getInt(0)+" "+
-            rs.getString(4)+ " " +
-            rs.getString(1)+" "+
-            rs.getString(2)+" "+
-            rs.getString(3)+" "+
-            rs.getDate(6)+" "+
-            rs.getDate(7));
-        return new User(rs.getInt(0),
-            rs.getString(4),
-            rs.getString(1),
-            rs.getString(2),
-            rs.getString(3),
-            rs.getDate(6),
-            rs.getDate(7),
-            null);
-      }
-      throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,"Couldn't find the user");
+      return user;
     }
     catch (SQLException ex) {
+      System.out.println(ex.getMessage());
       throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

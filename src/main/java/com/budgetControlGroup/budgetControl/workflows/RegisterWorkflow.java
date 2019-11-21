@@ -1,5 +1,6 @@
 package com.budgetControlGroup.budgetControl.workflows;
 
+import com.budgetControlGroup.budgetControl.dataAccess.DBConnection;
 import com.budgetControlGroup.budgetControl.database.PostgresConnection;
 import com.budgetControlGroup.budgetControl.Models.User;
 import com.budgetControlGroup.budgetControl.utils.UserUtils;
@@ -9,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Calendar;
 
 @Service
@@ -28,16 +27,22 @@ public class RegisterWorkflow {
 
   public User register(User user) {
     System.out.println(user);
-    if(checkUserExistence.exists(user.getUsername())) {
-      throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"User already exists");
-    }
+//    if(checkUserExistence.exists(user.getUsername())) {
+//      throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"User already exists");
+//    }
     user.setUserId(insert(user));
     return user;
   }
 
   private int insert(User user) {
-    Connection c = postgresConnection.getConnection();
-    String q1 = "insert into userid values('" +user.getFirstName()+ "', '" +
+    //Connection c = postgresConnection.getConnection();
+    Connection c = null;
+    try {
+      c = DBConnection.connect();
+    } catch(SQLException e){
+      System.out.println("Couldn't connect");
+    }
+    String q1 = "insert into users (first_name, last_name, email, username, password, last_login, date_created) values('" +user.getFirstName()+ "', '" +
         user.getLastName()+ "', '" +
         user.getEmail()+ "', '" +
         user.getUsername()+ "', '" +
@@ -57,8 +62,9 @@ public class RegisterWorkflow {
 
       try(ResultSet set = stmt.getGeneratedKeys()) {
         if(set.next())  {
+          int someInt = set.getInt(1);
           c.close();
-          return set.getInt(1);
+          return someInt;
         }
         else {
           c.close();
@@ -70,6 +76,7 @@ public class RegisterWorkflow {
 
     }
     catch(Exception e) {
+      System.out.println(e.getMessage());
       throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
