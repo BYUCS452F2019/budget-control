@@ -10,9 +10,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class TransactionService {
   //getServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/id?user_id='
-  //postServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/add?budget_id='
+  //postServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/add?user_id='
   getServerUrl: string = 'http://localhost:8080/transaction/id?user_id='
-  postServerUrl: string = 'http://localhost:8080/transaction/add?budget_id='
+  postServerUrl: string = 'http://localhost:8080/transaction/add?user_id='
   constructor(private http: HttpClient) {}
 
   getTransactions(user_id: string): Observable<Transaction[]> {
@@ -20,7 +20,8 @@ export class TransactionService {
   }
 
   addTransaction(transaction: TransactionRequest): Observable<TransactionResult> {
-    return this.http.get<TransactionResult>(this.postServerUrl.concat(transaction.budget_id)
+    return this.http.get<TransactionResult>(this.postServerUrl.concat(transaction.user_id)
+      .concat('&budget_id=').concat(transaction.budget_id)
       .concat('&cat_id=').concat(transaction.cat_id)
       .concat('&amount=').concat(transaction.amount)
       .concat('&date=').concat(transaction.date)

@@ -16,7 +16,7 @@ public class TransactionScript {
         try {
             //List<Transaction> transactions = transactionDAO.getTransactionsForUser(1);
             //System.out.println(transactions.size());
-            TransactionRequest transactionRequest = new TransactionRequest(1, 1, "$57.32", "2019-10-31", "This is the description");
+            TransactionRequest transactionRequest = new TransactionRequest(1, 1, 1, "$57.32", "2019-10-31", "This is the description");
             TransactionResult transactionResult = transactionDAO.addTransaction(transactionRequest);
             System.out.println(transactionResult.getMessage());
         } catch (SQLException e){

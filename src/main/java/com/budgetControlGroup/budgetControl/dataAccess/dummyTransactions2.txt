@@ -1,0 +1,96 @@
+1___1___$30.00___2019-07-14___Walmart grocery shopping
+1___1___$25.00___2019-07-17___Smiths grocery shopping
+1___1___$35.00___2019-07-24___BYU Creamery grocery shopping
+1___2___$100.00___2019-07-15___Monthly rent payment
+1___2___$100.00___2019-08-15___Monthly rent payment
+1___2___$100.00___2019-09-15___Monthly rent payment
+1___3___$28.00___2019-08-01___Football game
+1___3___$14.00___2019-08-09___Ice cream
+1___3___$27.00___2019-08-30___Out to eat dinner
+1___4___$230.15___2019-08-01___Textbooks at BYU store
+1___4___$30.00___2019-09-05___Class fee
+1___4___$15.32___2019-09-07___Supplies at BYU store
+1___5___$-500.00___2019-07-21___Monthly income check
+1___5___$-500.00___2019-08-21___Monthly income check
+1___5___$-500.00___2019-09-21___Monthly income check
+1___6___$10.32___2019-07-18___Monthly utilities
+1___6___$9.18___2019-08-18___Monthly utilities
+1___6___$15.31___2019-09-18___Monthly utilities
+1___7___$60.00___2019-08-23___Dr. visit - copay
+1___7___$10.03___2019-08-23___Medicine refill
+1___7___$1062.09___2019-09-16___Cavities!! - dentist bill
+1___8___$150.00___2019-07-17___Monthly Car payment
+1___8___$150.00___2019-08-17___Monthly Car payment
+1___8___$150.00___2019-09-17___Monthly Car payment
+2___1___$30.00___2019-07-14___Walmart grocery shopping
+2___1___$25.00___2019-07-17___Smiths grocery shopping
+2___1___$35.00___2019-07-24___BYU Creamery grocery shopping
+2___2___$100.00___2019-07-15___Monthly rent payment
+2___2___$100.00___2019-08-15___Monthly rent payment
+2___2___$100.00___2019-09-15___Monthly rent payment
+2___3___$28.00___2019-08-01___Football game
+2___3___$14.00___2019-08-09___Ice cream
+2___3___$27.00___2019-08-30___Out to eat dinner
+2___4___$230.15___2019-08-01___Textbooks at BYU store
+2___4___$30.00___2019-09-05___Class fee
+2___4___$15.32___2019-09-07___Supplies at BYU store
+2___5___$-500.00___2019-07-21___Monthly income check
+2___5___$-500.00___2019-08-21___Monthly income check
+2___5___$-500.00___2019-09-21___Monthly income check
+2___6___$10.32___2019-07-18___Monthly utilities
+2___6___$9.18___2019-08-18___Monthly utilities
+2___6___$15.31___2019-09-18___Monthly utilities
+2___7___$60.00___2019-08-23___Dr. visit - copay
+2___7___$10.03___2019-08-23___Medicine refill
+2___7___$1062.09___2019-09-16___Cavities!! - dentist bill
+2___8___$150.00___2019-07-17___Monthly Car payment
+2___8___$150.00___2019-08-17___Monthly Car payment
+2___8___$150.00___2019-09-17___Monthly Car payment
+3___1___$30.00___2019-07-14___Walmart grocery shopping
+3___1___$25.00___2019-07-17___Smiths grocery shopping
+3___1___$35.00___2019-07-24___BYU Creamery grocery shopping
+3___2___$100.00___2019-07-15___Monthly rent payment
+3___2___$100.00___2019-08-15___Monthly rent payment
+3___2___$100.00___2019-09-15___Monthly rent payment
+3___3___$28.00___2019-08-01___Football game
+3___3___$14.00___2019-08-09___Ice cream
+3___3___$27.00___2019-08-30___Out to eat dinner
+3___4___$230.15___2019-08-01___Textbooks at BYU store
+3___4___$30.00___2019-09-05___Class fee
+3___4___$15.32___2019-09-07___Supplies at BYU store
+3___5___$-500.00___2019-07-21___Monthly income check
+3___5___$-500.00___2019-08-21___Monthly income check
+3___5___$-500.00___2019-09-21___Monthly income check
+3___6___$10.32___2019-07-18___Monthly utilities
+3___6___$9.18___2019-08-18___Monthly utilities
+3___6___$15.31___2019-09-18___Monthly utilities
+3___7___$60.00___2019-08-23___Dr. visit - copay
+3___7___$10.03___2019-08-23___Medicine refill
+3___7___$1062.09___2019-09-16___Cavities!! - dentist bill
+3___8___$150.00___2019-07-17___Monthly Car payment
+3___8___$150.00___2019-08-17___Monthly Car payment
+3___8___$150.00___2019-09-17___Monthly Car payment
+4___1___$30.00___2019-07-14___Walmart grocery shopping
+4___1___$25.00___2019-07-17___Smiths grocery shoppng
+4___1___$35.00___2019-07-24___BYU Creamery grocery shopping
+4___2___$100.00___2019-07-15___Monthly rent payment
+4___2___$100.00___2019-08-15___Monthly rent payment
+4___2___$100.00___2019-09-15___Monthly rent payment
+4___3___$28.00___2019-08-01___Football game
+4___3___$14.00___2019-08-09___Ice cream
+4___3___$27.00___2019-08-30___Out to eat dinner
+4___4___$230.15___2019-08-01___Textbooks at BYU store
+4___4___$30.00___2019-09-05___Class fee
+4___4___$15.32___2019-09-07___Supplies at BYU store
+4___5___$-500.00___2019-07-21___Monthly income check
+4___5___$-500.00___2019-08-21___Monthly income check
+4___5___$-500.00___2019-09-21___Monthly income check
+4___6___$10.32___2019-07-18___Monthly utilities
+4___6___$9.18___2019-08-18___Monthly utilities
+4___6___$15.31___2019-09-18___Monthly utilities
+4___7___$60.00___2019-08-23___Dr. visit - copay
+4___7___$10.03___2019-08-23___Medicine refill
+4___7___$1062.09___2019-09-16___Cavities!! - dentist bill
+4___8___$150.00___2019-07-17___Monthly Car payment
+4___8___$150.00___2019-08-17___Monthly Car payment
+4___8___$150.00___2019-09-17___Monthly Car payment
