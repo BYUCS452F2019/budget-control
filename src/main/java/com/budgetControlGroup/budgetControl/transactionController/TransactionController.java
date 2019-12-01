@@ -3,6 +3,7 @@ package com.budgetControlGroup.budgetControl.transactionController;
 import com.budgetControlGroup.budgetControl.Models.Transaction;
 import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
 import com.budgetControlGroup.budgetControl.Models.TransactionResult;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.TransactionDao;
 import com.budgetControlGroup.budgetControl.dataAccess.TransactionDAO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,24 +31,33 @@ public class TransactionController {
 
     @RequestMapping("/id")
     public List<Transaction> getTransactions(@RequestParam(value="user_id", defaultValue="1") String userId){
-        TransactionDAO dao = new TransactionDAO();
+//        TransactionDAO dao = new TransactionDAO();
+//        try {
+//            return dao.getTransactionsForUser(Integer.parseInt(userId));
+//        } catch(SQLException e){
+//            System.err.println(e.getMessage());
+//            return new ArrayList<Transaction>();
+//        }
+        TransactionDao dao = new TransactionDao();
         try {
-            return dao.getTransactionsForUser(Integer.parseInt(userId));
-        } catch(SQLException e){
+            return dao.getTransactionsForBudget(1);
+        }catch(Exception e){
             System.err.println(e.getMessage());
             return new ArrayList<Transaction>();
         }
     }
 
     @RequestMapping("/add")
-    public TransactionResult addTransaction(@RequestParam(value="budget_id") String budgetId, @RequestParam(value="cat_id") String catId, @RequestParam(value="amount") String amount, @RequestParam(value="date") String date, @RequestParam(value="description") String description){
-        TransactionRequest incomingTransaction = new TransactionRequest(Integer.parseInt(budgetId), Integer.parseInt(catId), amount, date, description);
-        TransactionDAO dao = new TransactionDAO();
-        try {
-            return dao.addTransaction(incomingTransaction);
-        } catch(SQLException e){
-            System.err.println(e.getMessage());
-            return new TransactionResult(e.getMessage());
-        }
+    public TransactionResult addTransaction(@RequestParam(value="user_id") String userId, @RequestParam(value="budget_id") String budgetId, @RequestParam(value="cat_id") String catId, @RequestParam(value="amount") String amount, @RequestParam(value="date") String date, @RequestParam(value="description") String description){
+        TransactionRequest incomingTransaction = new TransactionRequest(Integer.parseInt(userId), Integer.parseInt(budgetId), Integer.parseInt(catId), amount, date, description);
+//        TransactionDAO dao = new TransactionDAO();
+//        try {
+//            return dao.addTransaction(incomingTransaction);
+//        } catch(SQLException e){
+//            System.err.println(e.getMessage());
+//            return new TransactionResult(e.getMessage());
+//        }
+        TransactionDao dao = new TransactionDao();
+        return dao.addTransaction(incomingTransaction);
     }
 }

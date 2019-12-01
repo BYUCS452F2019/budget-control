@@ -18,6 +18,10 @@ import java.util.Map;
 
 public class TransactionDao {
     private static final String TRANSACTION_TABLE = "Transaction";
+    private static final String CATEGORY_TABLE = "Category";
+    private static final String BUDGET_TABLE = "Budget";
+
+    private static final String USER_ID_ATTRIBUTE = "user_id";
     private static final String BUDGET_ID_ATTRIBUTE = "budget_id";
     private static final String BUDGET_NAME_ATTRIBUTE = "budget_name";
     private static final String TRANSACTION_ID_ATTRIBUTE = "transaction_id";
@@ -29,11 +33,15 @@ public class TransactionDao {
 
     AmazonDynamoDB amazonDynamoDB;
     Table transactionTable;
+    private Table budgetTable;
+    private Table categoryTable;
 
     public TransactionDao(){
         amazonDynamoDB = AmazonDynamoDBClientBuilder.standard().withRegion("us-west-2").build();
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         transactionTable = dynamoDB.getTable(TRANSACTION_TABLE);
+        budgetTable = dynamoDB.getTable(BUDGET_TABLE);
+        categoryTable = dynamoDB.getTable(CATEGORY_TABLE);
     }
 
     public List<Transaction> getTransactionsForBudget(int budgetId) throws Exception {
@@ -70,13 +78,31 @@ public class TransactionDao {
         }
     }
 
+    private String getBudgetName(int userId, int budgetId) throws Exception {
+        try {
+            Item item = budgetTable.getItem(USER_ID_ATTRIBUTE, userId, BUDGET_ID_ATTRIBUTE, budgetId);
+            return item.getString(BUDGET_NAME_ATTRIBUTE);
+        }catch(Exception e){
+            throw new Exception("Could not retrieve budget name: " + e.getMessage());
+        }
+    }
+
+    private String getCategoryName(int userId, int catId) throws Exception {
+        try {
+            Item item = categoryTable.getItem(USER_ID_ATTRIBUTE, userId, CATEGORY_ID_ATTRIBUTE, catId);
+            return item.getString(CATEGORY_NAME_ATTRIBUTE);
+        }catch(Exception e){
+            throw new Exception("Could not retrieve category name: " + e.getMessage());
+        }
+    }
+
     public TransactionResult addTransaction(TransactionRequest transactionRequest) {
         try {
             int newTransId = getLastTransactionId(transactionRequest.getBudget_id()) + 1;
             Item item = new Item().withPrimaryKey(BUDGET_ID_ATTRIBUTE, transactionRequest.getBudget_id(), TRANSACTION_ID_ATTRIBUTE, newTransId)
-                    .withString(BUDGET_NAME_ATTRIBUTE, "SomeBudget")
+                    .withString(BUDGET_NAME_ATTRIBUTE, getBudgetName(transactionRequest.getUser_id(), transactionRequest.getBudget_id()))
                     .withNumber(CATEGORY_ID_ATTRIBUTE, transactionRequest.getCat_id())
-                    .withString(CATEGORY_NAME_ATTRIBUTE, "SomeCategory")
+                    .withString(CATEGORY_NAME_ATTRIBUTE, getCategoryName(transactionRequest.getUser_id(), transactionRequest.getCat_id()))
                     .withString(AMOUNT_ATTRIBUTE, transactionRequest.getAmount())
                     .withString(DATE_ATTRIBUTE, transactionRequest.getDate())
                     .withString(DESCRIPTION_ATTRIBUTE, transactionRequest.getDescription());

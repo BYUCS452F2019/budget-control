@@ -1,9 +1,6 @@
 package com.budgetControlGroup.budgetControl.dataAccess.Dynamo;
 
-import com.budgetControlGroup.budgetControl.Models.Budget;
-import com.budgetControlGroup.budgetControl.Models.Budget_Item;
-import com.budgetControlGroup.budgetControl.Models.Category;
-import com.budgetControlGroup.budgetControl.Models.User;
+import com.budgetControlGroup.budgetControl.Models.*;
 
 import java.io.File;
 import java.sql.Connection;
@@ -74,6 +71,19 @@ public class CreateDummyData {
             }
             Budget_Item budget_item = new Budget_Item(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), tokens[2]);
             budgetItemDao.addBudgetItem(budget_item);
+        }
+    }
+
+    public void addTransactionsFromFile() throws Exception {
+        Scanner scanner = new Scanner(new File("src/main/java/com/budgetControlGroup/budgetControl/dataAccess/dummyTransactions2.txt"));
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            String[] tokens = line.split("___");
+            if(tokens.length != 5){
+                throw new Exception("Invalid number of parameters in file row!!!");
+            }
+            TransactionRequest transactionRequest = new TransactionRequest(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), tokens[2], tokens[3], tokens[4]);
+            transactionDAO.addTransaction(transactionRequest);
         }
     }
 

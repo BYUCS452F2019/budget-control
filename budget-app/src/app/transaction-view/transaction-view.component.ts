@@ -46,6 +46,7 @@ export class TransactionViewComponent implements OnInit {
   }
 
   addRealTransaction(transaction: TransactionRequest): void {
+    transaction.user_id = '1'; //For now
     this.transactionService.addTransaction(transaction)
       .subscribe(result => console.log(result));
   }

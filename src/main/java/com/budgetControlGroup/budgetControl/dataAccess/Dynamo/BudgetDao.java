@@ -4,9 +4,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.amazonaws.services.dynamodbv2.model.QueryRequest;
-import com.amazonaws.services.dynamodbv2.model.QueryResult;
+import com.amazonaws.services.dynamodbv2.model.*;
 import com.budgetControlGroup.budgetControl.Models.Budget;
 
 import java.util.List;
@@ -34,7 +32,7 @@ public class BudgetDao {
 
     public void addBudget(Budget budget) {  //I am ignoring the budget.budgetId value on the incoming object and assigning it inside this function
         try {
-            int newBudgetId = getLastBudgetId(budget.getUser_id()) + 1;
+            int newBudgetId = getLastBudgetId() + 1;
             Item item = new Item().withPrimaryKey(USER_ID_ATTRIBUTE, budget.getUser_id(), BUDGET_ID_ATTRIBUTE, newBudgetId)
                     .withString(BUDGET_NAME_ATTRIBUTE, budget.getName())
                     .withString(START_DATE_ATTRIBUTE, budget.getStart_date())
@@ -48,21 +46,20 @@ public class BudgetDao {
         }
     }
 
-    private int getLastBudgetId(int userId){
-        QueryRequest queryRequest = new QueryRequest().withTableName(BUDGET_TABLE)
-                .withKeyConditionExpression("#user_id = :user_id")
-                .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
-                .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)))
-                .withLimit(1)
-                .withScanIndexForward(false);  //This will give the most recent budgetId
+    private int getLastBudgetId(){
+        ScanRequest scanRequest = new ScanRequest().withTableName(BUDGET_TABLE)
+                .withAttributesToGet(BUDGET_ID_ATTRIBUTE);
 
-        QueryResult queryResult = amazonDynamoDB.query(queryRequest);
-        List<Map<String, AttributeValue>> items = queryResult.getItems();
-        if(!items.isEmpty()){
-            return Integer.parseInt(items.get(0).get(BUDGET_ID_ATTRIBUTE).getN());
-        }else{
-            return 0;
+        ScanResult scanResult = amazonDynamoDB.scan(scanRequest);
+        List<Map<String, AttributeValue>> items = scanResult.getItems();
+        int highestId = 0;
+        for(int i = 0; i < items.size(); i++){
+            int budgetId = Integer.parseInt(items.get(i).get(BUDGET_ID_ATTRIBUTE).getN());
+            if(budgetId > highestId){
+                highestId = budgetId;
+            }
         }
+        return highestId;
     }
 
 }

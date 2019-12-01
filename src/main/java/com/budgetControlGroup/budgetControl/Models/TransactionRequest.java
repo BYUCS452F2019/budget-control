@@ -1,18 +1,28 @@
 package com.budgetControlGroup.budgetControl.Models;
 
 public class TransactionRequest {
+    private int user_id;
     private int budget_id;
     private int cat_id;
     private String amount;
     private String date;
     private String description;
 
-    public TransactionRequest(int budget_id, int cat_id, String amount, String date, String description) {
+    public TransactionRequest(int user_id, int budget_id, int cat_id, String amount, String date, String description) {
+        this.user_id = user_id;
         this.budget_id = budget_id;
         this.cat_id = cat_id;
         this.amount = amount;
         this.date = date;
         this.description = description;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public int getBudget_id() {
