@@ -62,7 +62,7 @@ public class TransactionController {
 //        }
         TransactionDao dao = new TransactionDao();
         try {
-            return dao.getTransactionsForBudget(1);
+            return dao.getTransactionsForUser(Integer.parseInt(userId));
         }catch(Exception e){
             System.err.println(e.getMessage());
             return new ArrayList<Transaction>();

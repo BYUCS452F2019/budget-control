@@ -42,6 +42,28 @@ public class TransactionDao {
         categoryTable = dynamoDB.getTable(CATEGORY_TABLE);
     }
 
+    public List<Transaction> getTransactionsForUser(int userId) throws Exception{
+        ArrayList<Integer> budgetIds = new ArrayList<>();
+        QueryRequest queryRequest = new QueryRequest().withTableName(BUDGET_TABLE)
+                .withKeyConditionExpression("#user_id = :user_id")
+                .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
+                .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)));
+
+        QueryResult queryResult = amazonDynamoDB.query(queryRequest);
+        List<Map<String, AttributeValue>> items = queryResult.getItems();
+        if(items != null){
+            for(Map<String, AttributeValue> item : items){
+                budgetIds.add(new Integer(item.get(BUDGET_ID_ATTRIBUTE).getN()));
+            }
+        }
+
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        for(Integer budgetId : budgetIds){
+            transactions.addAll(getTransactionsForBudget(budgetId));
+        }
+        return transactions;
+    }
+
     public List<Transaction> getTransactionsForBudget(int budgetId) throws Exception {
         ArrayList<Transaction> transactions = new ArrayList<>();
 
