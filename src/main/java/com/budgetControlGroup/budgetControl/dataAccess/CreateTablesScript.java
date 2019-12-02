@@ -1,5 +1,8 @@
 package com.budgetControlGroup.budgetControl.dataAccess;
 
+import com.budgetControlGroup.budgetControl.Models.User;
+import com.budgetControlGroup.budgetControl.utils.UserUtils;
+
 import java.sql.*;
 
 public class CreateTablesScript {
@@ -86,8 +89,14 @@ public class CreateTablesScript {
     }
 
     public static void main(String[] args){
-        CreateTablesScript createTablesScript = new CreateTablesScript();
-        Connection conn = createTablesScript.connect(); 		// returns connection object
-        createTablesScript.createTables(conn);
+//        CreateTablesScript createTablesScript = new CreateTablesScript();
+//        Connection conn = createTablesScript.connect(); 		// returns connection object
+//        createTablesScript.createTables(conn);
+        UserUtils userUtils = new UserUtils(null);
+        boolean exists = userUtils.exists("tanner", "tpassword");
+        System.out.println(exists);
+
+        User user = userUtils.getUser("tanner", "tpassword");
+        System.out.println(user.getEmail());
     }
 }
