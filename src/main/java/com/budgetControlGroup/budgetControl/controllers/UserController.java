@@ -35,6 +35,5 @@ public class UserController {
   public User login(@RequestParam(value="username") String username,
                       @RequestParam(value="password") String password) {
     return userDao.login(new User(-1,username,null,null,null,null,null,password));
-//    loginWorkflow.login(username,password);
   }
 }

@@ -8,6 +8,7 @@ import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.budgetControlGroup.budgetControl.Models.User;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,21 +44,20 @@ public class UserDao {
                     .withString(EMAIL_ATTRIBUTE, user.getEmail())
                     .withString(USERNAME_ATTRIBUTE, user.getUsername())
                     .withString(PASSWORD_ATTRIBUTE, user.getPassword())
-                    .withString(LAST_LOGIN_ATTRIBUTE, user.getLastLogin().toString())
-                    .withString(DATE_CREATED_ATTRIBUTE, user.getDateCreated().toString());
+                    .withString(LAST_LOGIN_ATTRIBUTE, new Date().toString())
+                    .withString(DATE_CREATED_ATTRIBUTE, new Date().toString());
             usersTable.putItem(item);
             user.setUserId(userid);
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.println("Error adding user: \n" + e.getMessage());
             return null;
         }
-        return  user;
+        return user;
 
     }
 
     public User login(User user) {
         try {
-
             ScanResult scanResult = getScan(user);
             List<Map<String, AttributeValue>> items = scanResult.getItems();
             for (Map<String, AttributeValue> item : items) {
@@ -104,8 +104,8 @@ public class UserDao {
                         item.get(FIRST_NAME_ATTRIBUTE).getS(),
                         item.get(LAST_NAME_ATTRIBUTE).getS(),
                         item.get(EMAIL_ATTRIBUTE).getS(),
-                        null,
-                        null,
+                        new Date(item.get(LAST_LOGIN_ATTRIBUTE).getS()),
+                        new Date(item.get(DATE_CREATED_ATTRIBUTE).getS()),
                         null
                         );
         /*THIS DOES NOT GET DATES CURRENTLY*/
