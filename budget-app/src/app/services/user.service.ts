@@ -12,9 +12,10 @@ export class UserService {
   // serverUrl: string = 'https://cors-anywhere.herokuapp.com/' +
   //                     'http://ec2-18-191-122-27.us-east-2.compute.amazonaws.com:8080/greeting?name='
 
-  loginURI: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/user/login?'
-
-  registerURI: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/user/register'
+  // loginURI: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/user/login?'
+  loginURI: string = 'http://localhost:8080/user/login?'
+  // registerURI: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/user/register'
+  registerURI: string = 'http://localhost:8080/user/register'
   constructor(private http: HttpClient) { }
 
   login(username: string,password:string): Observable<User> {
@@ -22,9 +23,14 @@ export class UserService {
   }
 
   register(user:User): Observable<User> {
-    let result = this.http.put<User>(this.registerURI,user);
-    console.log(result);
-
+    //const httpOptions = {
+    //  headers: new HttpHeaders({
+    //    'Access-Control-Allow-Origin':  '*',
+    //    'Access-Control-Allow-Methods':  'DELETE, POST, GET, PUT, OPTIONS',
+    //    'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+    //  })
+    //};
+    let result = this.http.put<User>(this.registerURI, user);
     return result
   }
 }

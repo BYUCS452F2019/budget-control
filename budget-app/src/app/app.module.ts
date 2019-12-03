@@ -11,6 +11,7 @@ import { BudgetCreateComponent } from './budget-create/budget-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { UserAuthComponent } from './user-auth/user-auth.component';
+import { Globals } from './Globals';
 
 const appRoutes: Routes = [
   { path: 'budget', component: BudgetViewComponent },
@@ -39,7 +40,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule
   ],
   entryComponents: [],
-  providers: [],
+  providers: [
+    Globals
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

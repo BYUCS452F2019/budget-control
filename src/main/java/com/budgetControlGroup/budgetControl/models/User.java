@@ -87,6 +87,10 @@ public class User {
     this.dateCreated = dateCreated;
   }
 
+  public Date getDateCreated() {
+    return dateCreated;
+  }
+
   @Override
   public String toString() {
     return "User{" +

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../classes/transaction';
+import { Budget } from '../classes/budget';
+import { SingleCategory } from '../classes/singleCategory';
 import { TransactionService } from '../services/transaction.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { TransactionRequest } from '../classes/transactionRequest';
+import { Category } from '../classes/category';
+import { Globals } from '../Globals';
 
 @Component({
   selector: 'app-transaction-view',
@@ -13,9 +17,11 @@ import { TransactionRequest } from '../classes/transactionRequest';
 export class TransactionViewComponent implements OnInit {
   transactions: Transaction[];
   transaction: TransactionRequest;
+  budgets: Budget[];
+  categories: SingleCategory[];
   addForm: FormGroup;
 
-  constructor(private transactionService: TransactionService, private formBuilder: FormBuilder) {
+  constructor(private transactionService: TransactionService, private formBuilder: FormBuilder, private globals: Globals) {
     this.addForm = formBuilder.group({
                      budget_id: '',
                      cat_id: '',
@@ -38,6 +44,8 @@ export class TransactionViewComponent implements OnInit {
 
   ngOnInit(){
     this.getTransactions('1'); //Default user_id
+    this.getBudgets('1'); //Default user_id
+    this.getCategories('1'); //Default user_id
   }
 
   getTransactions(user_id: string): void {
@@ -45,7 +53,18 @@ export class TransactionViewComponent implements OnInit {
       .subscribe(result => this.transactions = result);
   }
 
+  getCategories(user_id: string): void{
+    this.transactionService.getCategories(user_id)
+      .subscribe(result => this.categories = result);
+  }
+
+  getBudgets(user_id: string): void{
+    this.transactionService.getBudgets(user_id)
+      .subscribe(result => this.budgets = result);
+  }
+
   addRealTransaction(transaction: TransactionRequest): void {
+    transaction.user_id = '1'; //For now
     this.transactionService.addTransaction(transaction)
       .subscribe(result => console.log(result));
   }
