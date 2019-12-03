@@ -1,8 +1,18 @@
 <br><br>
 <h2>Add Transaction: </h2>
 <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-  <input placeholder="BudgetId" formControlName="budget_id"  />
-  <input placeholder="CategoryId" formControlName="cat_id" />
+<!--  <input placeholder="BudgetId" formControlName="budget_id"  />-->
+  <select formControlName="budget_id">
+    <option *ngFor="let budget of budgets" [ngValue]="budget.budget_id">
+      {{ budget.name }}
+    </option>
+  </select>
+<!--  <input placeholder="CategoryId" formControlName="cat_id" />-->
+  <select formControlName="cat_id">
+    <option *ngFor="let category of categories" [ngValue]="category.cat_id">
+      {{ category.name }}
+    </option>
+  </select>
   <input placeholder="Amount" formControlName="amount"/>
   <input placeholder="Date" formControlName="date"/>
   <input placeholder="Description" formControlName="description"/><br>
