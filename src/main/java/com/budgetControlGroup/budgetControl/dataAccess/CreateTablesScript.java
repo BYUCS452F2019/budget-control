@@ -89,14 +89,8 @@ public class CreateTablesScript {
     }
 
     public static void main(String[] args){
-//        CreateTablesScript createTablesScript = new CreateTablesScript();
-//        Connection conn = createTablesScript.connect(); 		// returns connection object
-//        createTablesScript.createTables(conn);
-        UserUtils userUtils = new UserUtils(null);
-        boolean exists = userUtils.exists("tanner", "tpassword");
-        System.out.println(exists);
-
-        User user = userUtils.getUser("tanner", "tpassword");
-        System.out.println(user.getEmail());
+        CreateTablesScript createTablesScript = new CreateTablesScript();
+        Connection conn = createTablesScript.connect(); 		// returns connection object
+        createTablesScript.createTables(conn);
     }
 }

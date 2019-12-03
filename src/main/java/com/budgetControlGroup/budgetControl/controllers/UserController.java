@@ -18,14 +18,16 @@ public class UserController {
     this.loginWorkflow = loginWorkflow;
   }
 
+  @CrossOrigin(origins = "*")
   @RequestMapping(method = RequestMethod.PUT, value="/register")
   public User register(@RequestBody User user) {
     return registerWorkflow.register(user);
   }
 
+  @CrossOrigin(origins = "*")
   @RequestMapping(method = RequestMethod.GET, value="/login")
-  public User login(@RequestHeader("username") String username,
-                      @RequestHeader("password") String password) {
+  public User login(@RequestParam(value="username") String username,
+                      @RequestParam(value="password") String password) {
     return loginWorkflow.login(username,password);
   }
 }
