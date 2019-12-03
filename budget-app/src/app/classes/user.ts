@@ -4,11 +4,11 @@ export class User{
         this.password = password;
         this.email = email;
         this.firstName = firstName;
-        this. lastName = lastName;
+        this.lastName = lastName;
     }
     username:string;
     password:string;
-    id:number;
+    userId:number;
     email:string;
     firstName:string;
     lastName:string;

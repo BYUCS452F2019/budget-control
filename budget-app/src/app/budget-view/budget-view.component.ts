@@ -3,6 +3,7 @@ import { formatCurrency } from '@angular/common';
 import { Budget } from '../classes/budget';
 import { BudgetService } from '../services/budget.service';
 import { TransactionViewComponent } from '../transaction-view/transaction-view.component';
+import { Globals } from '../Globals'
 
 @Component({
   selector: 'app-budget-view',
@@ -21,13 +22,15 @@ export class BudgetViewComponent implements OnInit {
   income_display: string;
   expense_display: string;
 
-  constructor(private budgetService: BudgetService) { }
+  constructor(private budgetService: BudgetService, private globals: Globals) { }
 
   ngOnInit() {
+    this.getBudget(String(this.globals.user.userId));
   }
 
   getBudget(user_id: string): void {
-    this.budgetService.getBudgetByUserId(user_id)
+    console.log(user_id)
+    this.budgetService.getBudgetByUserId(String(user_id))
         .subscribe(result => {
           this.budget = result;
         });
