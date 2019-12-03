@@ -1,5 +1,8 @@
 package com.budgetControlGroup.budgetControl.dataAccess;
 
+import com.budgetControlGroup.budgetControl.Models.User;
+import com.budgetControlGroup.budgetControl.utils.UserUtils;
+
 import java.sql.*;
 
 public class CreateTablesScript {

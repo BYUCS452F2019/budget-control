@@ -1,5 +1,11 @@
 package com.budgetControlGroup.budgetControl.dataAccess;
 
+import com.budgetControlGroup.budgetControl.Models.User;
+import com.budgetControlGroup.budgetControl.database.PostgresConnection;
+import com.budgetControlGroup.budgetControl.utils.UserUtils;
+import com.budgetControlGroup.budgetControl.workflows.LoginWorkflow;
+import com.budgetControlGroup.budgetControl.workflows.RegisterWorkflow;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -116,8 +122,16 @@ public class CreateDummyData {
     }
 
     public static void main(String[] args){
-        CreateDummyData createDummyData = new CreateDummyData();
-        Connection conn = createDummyData.connect(); 		// returns connection object
-        createDummyData.insertData(conn);
+//        CreateDummyData createDummyData = new CreateDummyData();
+//        Connection conn = createDummyData.connect(); 		// returns connection object
+//        createDummyData.insertData(conn);
+        PostgresConnection postgresConnection = new PostgresConnection();
+        //RegisterWorkflow registerWorkflow = new RegisterWorkflow(postgresConnection, new UserUtils(postgresConnection));
+        User user = new User(8, "cannon", "jason", "cannon", "email", null, null, "password");
+//        registerWorkflow.register(user);
+        LoginWorkflow loginWorkflow = new LoginWorkflow(new UserUtils(postgresConnection));
+
+        User user2 = loginWorkflow.login("cannon", "password");
+        System.out.println(user2);
     }
 }
