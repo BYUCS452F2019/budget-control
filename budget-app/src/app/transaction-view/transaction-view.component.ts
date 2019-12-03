@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../classes/transaction';
+import { Budget } from '../classes/budget';
+import { SingleCategory } from '../classes/singleCategory';
 import { TransactionService } from '../services/transaction.service';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms'
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { TransactionRequest } from '../classes/transactionRequest';
 
 @Component({
