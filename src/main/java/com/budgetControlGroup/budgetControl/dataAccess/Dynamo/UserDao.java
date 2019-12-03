@@ -4,6 +4,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.Table;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.budgetControlGroup.budgetControl.Models.User;
 
@@ -30,10 +31,13 @@ public class UserDao {
         usersTable = dynamoDB.getTable(USERS_TABLE);
     }
 
-    public void addUser(User user) {  //I am ignoring the user_id value on the incoming object and assigning it inside this function
+    public User addUser(User user) {  //I am ignoring the user_id value on the incoming object and assigning it inside this function
         try {
-            int newUserId = getLastUserId() + 1;
-            Item item = new Item().withPrimaryKey(USER_ID_ATTRIBUTE, newUserId)
+            if(exists(user)) {
+                return null;
+            }
+            int userid = getLastUserId() + 1;
+            Item item = new Item().withPrimaryKey(USER_ID_ATTRIBUTE, userid)
                     .withString(FIRST_NAME_ATTRIBUTE, user.getFirstName())
                     .withString(LAST_NAME_ATTRIBUTE, user.getLastName())
                     .withString(EMAIL_ATTRIBUTE, user.getEmail())
@@ -42,9 +46,69 @@ public class UserDao {
                     .withString(LAST_LOGIN_ATTRIBUTE, user.getLastLogin().toString())
                     .withString(DATE_CREATED_ATTRIBUTE, user.getDateCreated().toString());
             usersTable.putItem(item);
+            user.setUserId(userid);
         }catch(Exception e){
             System.out.println("Error adding user: \n" + e.getMessage());
+            return null;
         }
+        return  user;
+
+    }
+
+    public User login(User user) {
+        try {
+
+            ScanResult scanResult = getScan(user);
+            List<Map<String, AttributeValue>> items = scanResult.getItems();
+            for (Map<String, AttributeValue> item : items) {
+                if(item.get(USERNAME_ATTRIBUTE).getS().equals(user.getUsername()) &&
+                    item.get(PASSWORD_ATTRIBUTE).getS().equals(user.getPassword())) {
+                    return mapToUser(item);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Error logging in: \n" + e.getMessage());
+        }
+        return null;
+    }
+
+    private ScanResult getScan(User user) {
+        ScanRequest scanRequest = new ScanRequest().withTableName(USERS_TABLE)
+            .withAttributesToGet(USER_ID_ATTRIBUTE,
+                FIRST_NAME_ATTRIBUTE,
+                LAST_NAME_ATTRIBUTE,
+                EMAIL_ATTRIBUTE,
+                USERNAME_ATTRIBUTE,
+                PASSWORD_ATTRIBUTE,
+                LAST_LOGIN_ATTRIBUTE,
+                DATE_CREATED_ATTRIBUTE);
+        return amazonDynamoDB.scan(scanRequest);
+
+    }
+
+    private boolean exists(User user) {
+        ScanResult scanResult = getScan(user);
+        List<Map<String, AttributeValue>> items = scanResult.getItems();
+        for (Map<String, AttributeValue> item : items) {
+            if(item.get(USERNAME_ATTRIBUTE).getS().equals(user.getUsername()) &&
+                item.get(PASSWORD_ATTRIBUTE).getS().equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private User mapToUser(Map<String, AttributeValue> item) {
+        return new User(Integer.parseInt(item.get(USER_ID_ATTRIBUTE).getN()),
+                        item.get(USERNAME_ATTRIBUTE).getS(),
+                        item.get(FIRST_NAME_ATTRIBUTE).getS(),
+                        item.get(LAST_NAME_ATTRIBUTE).getS(),
+                        item.get(EMAIL_ATTRIBUTE).getS(),
+                        null,
+                        null,
+                        null
+                        );
+        /*THIS DOES NOT GET DATES CURRENTLY*/
     }
 
     private int getLastUserId(){
