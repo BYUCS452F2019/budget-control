@@ -8,9 +8,7 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
-import com.budgetControlGroup.budgetControl.Models.Transaction;
-import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
-import com.budgetControlGroup.budgetControl.Models.TransactionResult;
+import com.budgetControlGroup.budgetControl.Models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +40,28 @@ public class TransactionDao {
         transactionTable = dynamoDB.getTable(TRANSACTION_TABLE);
         budgetTable = dynamoDB.getTable(BUDGET_TABLE);
         categoryTable = dynamoDB.getTable(CATEGORY_TABLE);
+    }
+
+    public List<Transaction> getTransactionsForUser(int userId) throws Exception{
+        ArrayList<Integer> budgetIds = new ArrayList<>();
+        QueryRequest queryRequest = new QueryRequest().withTableName(BUDGET_TABLE)
+                .withKeyConditionExpression("#user_id = :user_id")
+                .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
+                .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)));
+
+        QueryResult queryResult = amazonDynamoDB.query(queryRequest);
+        List<Map<String, AttributeValue>> items = queryResult.getItems();
+        if(items != null){
+            for(Map<String, AttributeValue> item : items){
+                budgetIds.add(new Integer(item.get(BUDGET_ID_ATTRIBUTE).getN()));
+            }
+        }
+
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        for(Integer budgetId : budgetIds){
+            transactions.addAll(getTransactionsForBudget(budgetId));
+        }
+        return transactions;
     }
 
     public List<Transaction> getTransactionsForBudget(int budgetId) throws Exception {

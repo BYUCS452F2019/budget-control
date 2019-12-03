@@ -1,8 +1,8 @@
 package com.budgetControlGroup.budgetControl.transactionController;
 
-import com.budgetControlGroup.budgetControl.Models.Transaction;
-import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
-import com.budgetControlGroup.budgetControl.Models.TransactionResult;
+import com.budgetControlGroup.budgetControl.Models.*;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetDao;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.CategoryDao;
 import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.TransactionDao;
 import com.budgetControlGroup.budgetControl.dataAccess.TransactionDAO;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +29,28 @@ public class TransactionController {
         }
     }
 
+    @RequestMapping("/budgets")
+    public List<Budget> getBudgets(@RequestParam(value="user_id", defaultValue="1") String userId){
+        BudgetDao dao = new BudgetDao();
+        try {
+            return dao.getBudgetsForUser(Integer.parseInt(userId));
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return new ArrayList<Budget>();
+        }
+    }
+
+    @RequestMapping("/categories")
+    public List<Category> getCategories(@RequestParam(value="user_id", defaultValue="1") String userId){
+        CategoryDao dao = new CategoryDao();
+        try {
+            return dao.getCategoriesForUser(Integer.parseInt(userId));
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+            return new ArrayList<Category>();
+        }
+    }
+
     @RequestMapping("/id")
     public List<Transaction> getTransactions(@RequestParam(value="user_id", defaultValue="1") String userId){
 //        TransactionDAO dao = new TransactionDAO();
@@ -40,7 +62,7 @@ public class TransactionController {
 //        }
         TransactionDao dao = new TransactionDao();
         try {
-            return dao.getTransactionsForBudget(1);
+            return dao.getTransactionsForUser(Integer.parseInt(userId));
         }catch(Exception e){
             System.err.println(e.getMessage());
             return new ArrayList<Transaction>();
