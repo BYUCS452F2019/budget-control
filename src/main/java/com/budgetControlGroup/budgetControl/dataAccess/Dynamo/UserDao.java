@@ -48,8 +48,7 @@ public class UserDao {
                     .withString(DATE_CREATED_ATTRIBUTE, new Date().toString());
             usersTable.putItem(item);
             user.setUserId(userid);
-        }catch(Exception e){
-            System.out.println(e);
+        } catch(Exception e) {
             System.out.println("Error adding user: \n" + e.getMessage());
             return null;
         }
