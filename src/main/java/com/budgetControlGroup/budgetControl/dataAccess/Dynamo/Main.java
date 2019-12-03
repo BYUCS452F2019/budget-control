@@ -1,17 +1,15 @@
 package com.budgetControlGroup.budgetControl.dataAccess.Dynamo;
 
-import com.budgetControlGroup.budgetControl.Models.Transaction;
-import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
-import com.budgetControlGroup.budgetControl.Models.TransactionResult;
+import com.budgetControlGroup.budgetControl.Models.*;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        TransactionDao transactionDao = new TransactionDao();
+        CategoryDao categoryDao = new CategoryDao();
         try {
-            List<Transaction> transactions = transactionDao.getTransactionsForBudget(1);
-            System.out.println(transactions.size());
+            List<Category> categories = categoryDao.getCategoriesForUser(1);
+            System.out.println(categories.size());
         }catch(Exception e){
             System.err.println(e.getMessage());
         }

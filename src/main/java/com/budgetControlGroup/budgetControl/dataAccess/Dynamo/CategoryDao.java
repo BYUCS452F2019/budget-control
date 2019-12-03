@@ -7,8 +7,10 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
+import com.budgetControlGroup.budgetControl.Models.Budget;
 import com.budgetControlGroup.budgetControl.Models.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +37,36 @@ public class CategoryDao {
             categoryTable.putItem(item);
         }catch(Exception e){
             System.out.println("Error adding category: \n" + e.getMessage());
+        }
+    }
+
+    public List<Category> getCategoriesForUser(int userId) throws Exception {
+        ArrayList<Category> categories = new ArrayList<>();
+
+        QueryRequest queryRequest = new QueryRequest().withTableName(CATEGORY_TABLE)
+                .withKeyConditionExpression("#user_id = :user_id")
+                .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
+                .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)));
+
+        QueryResult queryResult = amazonDynamoDB.query(queryRequest);
+
+        List<Map<String, AttributeValue>> items = queryResult.getItems();
+        if(items != null){
+            for(Map<String, AttributeValue> item : items){
+                categories.add(mapToCategory(item));
+            }
+        }
+        return categories;
+    }
+
+    private Category mapToCategory(Map<String, AttributeValue> map) throws Exception{
+        try{
+            int userId = Integer.parseInt(map.get(USER_ID_ATTRIBUTE).getN());
+            int categoryId = Integer.parseInt(map.get(CATEGORY_ID_ATTRIBUTE).getN());
+            String categoryName = map.get(CATEGORY_NAME_ATTRIBUTE).getS();
+            return new Category(categoryName, userId, categoryId);
+        }catch(Exception e){
+            throw new Exception("Error converting from map to category!");
         }
     }
 

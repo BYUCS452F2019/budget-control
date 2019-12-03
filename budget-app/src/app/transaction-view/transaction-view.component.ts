@@ -13,6 +13,8 @@ import { TransactionRequest } from '../classes/transactionRequest';
 export class TransactionViewComponent implements OnInit {
   transactions: Transaction[];
   transaction: TransactionRequest;
+  budgets: Budget[];
+  categories: SingleCategory[];
   addForm: FormGroup;
 
   constructor(private transactionService: TransactionService, private formBuilder: FormBuilder) {
@@ -38,11 +40,23 @@ export class TransactionViewComponent implements OnInit {
 
   ngOnInit(){
     this.getTransactions('1'); //Default user_id
+    this.getBudgets('1'); //Default user_id
+    this.getCategories('1'); //Default user_id
   }
 
   getTransactions(user_id: string): void {
     this.transactionService.getTransactions(user_id)
       .subscribe(result => this.transactions = result);
+  }
+
+  getCategories(user_id: string): void{
+    this.transactionService.getCategories(user_id)
+      .subscribe(result => this.categories = result);
+  }
+
+  getBudgets(user_id: string): void{
+    this.transactionService.getBudgets(user_id)
+      .subscribe(result => this.budgets = result);
   }
 
   addRealTransaction(transaction: TransactionRequest): void {

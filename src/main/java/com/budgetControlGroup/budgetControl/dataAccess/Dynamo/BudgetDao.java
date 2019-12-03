@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.*;
 import com.budgetControlGroup.budgetControl.Models.Budget;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,41 @@ public class BudgetDao {
             budgetTable.putItem(item);
         }catch(Exception e){
             System.out.println("Error adding budget: \n" + e.getMessage());
+        }
+    }
+
+    public List<Budget> getBudgetsForUser(int userId) throws Exception {
+        ArrayList<Budget> budgets = new ArrayList<>();
+
+        QueryRequest queryRequest = new QueryRequest().withTableName(BUDGET_TABLE)
+                .withKeyConditionExpression("#user_id = :user_id")
+                .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
+                .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)));
+
+        QueryResult queryResult = amazonDynamoDB.query(queryRequest);
+
+        List<Map<String, AttributeValue>> items = queryResult.getItems();
+        if(items != null){
+            for(Map<String, AttributeValue> item : items){
+                budgets.add(mapToBudget(item));
+            }
+        }
+        return budgets;
+    }
+
+    private Budget mapToBudget(Map<String, AttributeValue> map) throws Exception{
+        try{
+            int userId = Integer.parseInt(map.get(USER_ID_ATTRIBUTE).getN());
+            int budgetId = Integer.parseInt(map.get(BUDGET_ID_ATTRIBUTE).getN());
+            String budgetName = map.get(BUDGET_NAME_ATTRIBUTE).getS();
+            String startDate = map.get(START_DATE_ATTRIBUTE).getS();
+            String endDate = map.get(END_DATE_ATTRIBUTE).getS();
+            String totalIncome = map.get(TOTAL_INCOME_ATTRIBUTE).getS();
+            String totalExpense = map.get(TOTAL_EXPENSE_ATTRIBUTE).getS();
+            String description = map.get(DESCRIPTION_ATTRIBUTE).getS();
+            return new Budget(budgetId, budgetName, userId, startDate, endDate, totalIncome, totalExpense, description);
+        }catch(Exception e){
+            throw new Exception("Error converting from map to budget!");
         }
     }
 

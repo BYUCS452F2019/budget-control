@@ -8,9 +8,7 @@ import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
-import com.budgetControlGroup.budgetControl.Models.Transaction;
-import com.budgetControlGroup.budgetControl.Models.TransactionRequest;
-import com.budgetControlGroup.budgetControl.Models.TransactionResult;
+import com.budgetControlGroup.budgetControl.Models.*;
 
 import java.util.ArrayList;
 import java.util.List;
