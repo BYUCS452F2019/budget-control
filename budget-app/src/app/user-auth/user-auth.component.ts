@@ -20,7 +20,11 @@ export class UserAuthComponent implements OnInit {
   login(userName:string, password:string): void {
     
     console.log(userName + " " + password )
-    this.userService.login(userName,password).subscribe(result => this.user = result)
+    this.userService.login(userName,password).subscribe(result => {
+      this.user = result
+      // Store user globally
+      // Redirect to Transaction page
+    })
     // this.budgetService.getBudgetByUserId(user_id)
     //     .subscribe(result => this.budget = result);
   }

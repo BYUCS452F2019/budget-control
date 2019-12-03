@@ -4,6 +4,8 @@ import { TransactionRequest } from '../classes/transactionRequest'
 import { TransactionResult } from '../classes/transactionResult'
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Budget } from '../classes/budget'
+import { Category } from '../classes/category'
 
 @Injectable({
   providedIn: 'root'
