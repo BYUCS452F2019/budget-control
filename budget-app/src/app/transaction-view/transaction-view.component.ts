@@ -5,8 +5,6 @@ import { SingleCategory } from '../classes/singleCategory';
 import { TransactionService } from '../services/transaction.service';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { TransactionRequest } from '../classes/transactionRequest';
-import { Budget } from '../classes/budget';
-import { SingleCategory } from '../classes/singleCategory'
 import { Category } from '../classes/category'
 
 @Component({
@@ -19,8 +17,7 @@ export class TransactionViewComponent implements OnInit {
   transactions: Transaction[];
   transaction: TransactionRequest;
   budgets: Budget[];
-  // Does this need to be SingleCategory?
-  categories: Category[];
+  categories: SingleCategory[];
   addForm: FormGroup;
 
   constructor(private transactionService: TransactionService, private formBuilder: FormBuilder) {

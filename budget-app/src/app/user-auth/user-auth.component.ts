@@ -22,6 +22,7 @@ export class UserAuthComponent implements OnInit {
     console.log(userName + " " + password )
     this.userService.login(userName,password).subscribe(result => {
       this.user = result
+      console.log(this.user)
       // Store user globally
       // Redirect to Transaction page
     })
@@ -32,7 +33,12 @@ export class UserAuthComponent implements OnInit {
   register(firstName:string, lastName:string, email:string, userName:string, password:string) {
     let user = new User(firstName,lastName, email, userName,password)    
 
-    this.userService.register(user).subscribe(result => this.user = result);
+    this.userService.register(user).subscribe(result => {
+      this.user = result
+      if (result == null) {
+        console.log('user already exists');
+      }
+    });
 
   }
 }

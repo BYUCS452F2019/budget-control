@@ -6,7 +6,6 @@ import { Budget } from '../classes/budget'
 import { SingleCategory } from '../classes/singleCategory'
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Budget } from '../classes/budget'
 import { Category } from '../classes/category'
 
 @Injectable({
