@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Budget } from '../classes/budget';
 import { BudgetCreateService } from '../services/create_budget.service';
 import * as uuid from 'uuid';
+import { Globals } from '../Globals';
 
 
 @Component({
   selector: 'app-budget-create',
   templateUrl: './budget-create.component.html',
   styleUrls: ['./budget-create.component.css']
+
 })
 export class BudgetCreateComponent implements OnInit {
   result_budget: Budget;
-  constructor(private budgetCreateService: BudgetCreateService) { }
+  constructor(private budgetCreateService: BudgetCreateService, private globals: Globals) { }
 
   ngOnInit() {
   }
@@ -33,7 +35,7 @@ export class BudgetCreateComponent implements OnInit {
 
     let budget_obj = new Budget();
     var budget_id = 23;
-    var user_id = 3;
+    var user_id = this.globals.user.userId;
     budget_obj.budget_id = budget_id;
     budget_obj.description = budgetDescr;
     budget_obj.end_date = endDate;
@@ -72,10 +74,13 @@ export class BudgetCreateComponent implements OnInit {
   sendBudget(this, budget_obj: Budget, category_list: string[], category_expense: string[]): void {
     console.log("----in sendBudget Method----")
     console.log(budget_obj);
-    this.budgetCreateService.createBudget(budget_obj)
-      .subscribe(result => {
+	console.log("---budget_obj.user_id----")
+	console.log(budget_obj.user_id)
+    this.budgetCreateService.createBudget(budget_obj).subscribe(result => {
         this.result_budget = result;
-        result = this.sendCat(category_list, category_expense, this.result_budget.user_id, this.result_budget.budget_id)
+		console.log("---budget returned after subscribe number 1---")
+		console.log(this.result_budget)
+        result = this.sendCat(category_list, category_expense, budget_obj.user_id, this.result_budget.budget_id)
       });
     console.log("after subscribe");
     return;

@@ -43,6 +43,7 @@ public class TransactionDao {
     }
 
     public List<Transaction> getTransactionsForUser(int userId) throws Exception{
+        System.out.println("Jason jason he's our man if he can't do it no one can\n");
         ArrayList<Integer> budgetIds = new ArrayList<>();
         QueryRequest queryRequest = new QueryRequest().withTableName(BUDGET_TABLE)
                 .withKeyConditionExpression("#user_id = :user_id")
