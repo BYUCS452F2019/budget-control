@@ -26,7 +26,7 @@ public class UserDao {
     private AmazonDynamoDB amazonDynamoDB;
     private Table usersTable;
 
-    public UserDao(){
+    public UserDao() {
         amazonDynamoDB = Connection.connect();
         DynamoDB dynamoDB = new DynamoDB(amazonDynamoDB);
         usersTable = dynamoDB.getTable(USERS_TABLE);

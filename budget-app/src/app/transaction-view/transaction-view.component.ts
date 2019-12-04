@@ -43,9 +43,9 @@ export class TransactionViewComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.getTransactions('1'); //Default user_id
-    this.getBudgets('1'); //Default user_id
-    this.getCategories('1'); //Default user_id
+    this.getTransactions(String(this.globals.user.userId)); //Default user_id
+    this.getBudgets(String(this.globals.user.userId)); //Default user_id
+    this.getCategories(String(this.globals.user.userId)); //Default user_id
   }
 
   getTransactions(user_id: string): void {

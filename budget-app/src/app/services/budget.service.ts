@@ -13,7 +13,8 @@ export class BudgetService {
   //                     'http://ec2-18-191-122-27.us-east-2.compute.amazonaws.com:8080/greeting?name='
 
   budgetIdUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budget/id?budget_id='
-  userIdUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budget/user_id?user_id='
+  // userIdUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budget/user_id?user_id='
+  userIdUrl: string = 'http://localhost:8080/budget/user_id?user_id='
   constructor(private http: HttpClient) { }
 
   getBudget(budget_id: string): Observable<Budget> {

@@ -1,6 +1,7 @@
 package com.budgetControlGroup.budgetControl.budgetController;
 
 import com.budgetControlGroup.budgetControl.Models.Budget;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetDao;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ public class BudgetController {
     private String url = "jdbc:postgresql:budgetcontrol";
     private final String user = "postgres";
     private final String password = "jmcBudget452";
+    private BudgetDao budgetDao = new BudgetDao();
 
     @RequestMapping(value = "")
     public List<Budget> budget() {
@@ -73,25 +75,33 @@ public class BudgetController {
 
     @RequestMapping("/all_budgets")
     public List<Budget> getAllBudgetsForUser(@RequestParam(value="user_id") String user_id) {
-        List<Budget> result = new ArrayList<Budget>();
-        String query = "SELECT * FROM Budget WHERE user_id = %s;";
+//        List<Budget> result = new ArrayList<>();
+//        String query = "SELECT * FROM Budget WHERE user_id = %s;";
+//
+//        try {
+//            Connection connection = connect();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(String.format(query, user_id));
+//
+//            while (resultSet.next()) {
+//                Budget budget = new Budget(resultSet.getInt("budget_id"),
+//                        resultSet.getString("name"),
+//                        resultSet.getInt("user_id"),
+//                        resultSet.getString("start_date"),
+//                        resultSet.getString("end_date"),
+//                        resultSet.getString("total_income"),
+//                        resultSet.getString("total_expense"),
+//                        resultSet.getString("description"));
+//                result.add(budget);
+//            }
+//        } catch (Exception ex) {
+//            System.err.println(ex.getMessage());
+//        }
+
+        List<Budget> result = null;
 
         try {
-            Connection connection = connect();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format(query, user_id));
-
-            while (resultSet.next()) {
-                Budget budget = new Budget(resultSet.getInt("budget_id"),
-                        resultSet.getString("name"),
-                        resultSet.getInt("user_id"),
-                        resultSet.getString("start_date"),
-                        resultSet.getString("end_date"),
-                        resultSet.getString("total_income"),
-                        resultSet.getString("total_expense"),
-                        resultSet.getString("description"));
-                result.add(budget);
-            }
+            result = budgetDao.getBudgetsForUser(Integer.parseInt(user_id));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
@@ -101,29 +111,36 @@ public class BudgetController {
 
     @RequestMapping(value = "/user_id")
     public Budget budgetByUserId(@RequestParam(value="user_id") String user_id) {
-        Budget result = null;
-        String query = "SELECT * FROM Budget WHERE user_id = %s;";
+//        Budget result = null;
+//        String query = "SELECT * FROM Budget WHERE user_id = %s;";
+//
+//        try {
+//            Connection connection = connect();
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(String.format(query, user_id));
+//
+//            if (resultSet.next()) {
+//                result = new Budget(resultSet.getInt("budget_id"),
+//                        resultSet.getString("name"),
+//                        resultSet.getInt("user_id"),
+//                        resultSet.getString("start_date"),
+//                        resultSet.getString("end_date"),
+//                        resultSet.getString("total_income"),
+//                        resultSet.getString("total_expense"),
+//                        resultSet.getString("description"));
+//            }
+//        } catch (Exception ex) {
+//            System.err.println(ex.getMessage());
+//        }
 
+        List<Budget> result = null;
         try {
-            Connection connection = connect();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(String.format(query, user_id));
-
-            if (resultSet.next()) {
-                result = new Budget(resultSet.getInt("budget_id"),
-                        resultSet.getString("name"),
-                        resultSet.getInt("user_id"),
-                        resultSet.getString("start_date"),
-                        resultSet.getString("end_date"),
-                        resultSet.getString("total_income"),
-                        resultSet.getString("total_expense"),
-                        resultSet.getString("description"));
-            }
+            result = budgetDao.getBudgetsForUser(Integer.parseInt(user_id));
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
         }
 
-        return result;
+        return result.get(0);
     }
 
     private Connection connect(){

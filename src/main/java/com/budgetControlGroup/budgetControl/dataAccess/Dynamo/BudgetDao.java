@@ -55,6 +55,7 @@ public class BudgetDao {
                 .addExpressionAttributeNamesEntry("#user_id", USER_ID_ATTRIBUTE)
                 .addExpressionAttributeValuesEntry(":user_id", new AttributeValue().withN(String.valueOf(userId)));
 
+        System.out.println("Querying...");
         QueryResult queryResult = amazonDynamoDB.query(queryRequest);
 
         List<Map<String, AttributeValue>> items = queryResult.getItems();
@@ -63,6 +64,7 @@ public class BudgetDao {
                 budgets.add(mapToBudget(item));
             }
         }
+
         return budgets;
     }
 
