@@ -8,10 +8,10 @@ import { Category } from '../classes/category';
   providedIn: 'root'
 })
 export class BudgetCreateService {
-  //serverUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budgetCreateController/budgetCreate'
-  //serverUrlCat: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budgetCreateController/CatCreate'
-  serverUrl: string = 'http://localhost:8080/budgetCreateController/budgetCreate'
-  serverUrlCat: string = 'http://localhost:8080/budgetCreateController/CatCreate'
+  serverUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budgetCreateController/budgetCreate'
+  serverUrlCat: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/budgetCreateController/CatCreate'
+  //serverUrl: string = 'http://localhost:8080/budgetCreateController/budgetCreate'
+  //serverUrlCat: string = 'http://localhost:8080/budgetCreateController/CatCreate'
   constructor(private http: HttpClient) {}
 
   createBudget(budget: Budget): Observable<Budget> {
