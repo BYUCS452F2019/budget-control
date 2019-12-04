@@ -2,6 +2,7 @@ package com.budgetControlGroup.budgetControl.budgetController;
 
 import com.budgetControlGroup.budgetControl.Models.Budget;
 import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetDao;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/budget")
 
 @RestController
@@ -20,6 +22,7 @@ public class BudgetController {
     private final String password = "jmcBudget452";
     private BudgetDao budgetDao = new BudgetDao();
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "")
     public List<Budget> budget() {
         List<Budget> result = new ArrayList<>();
@@ -46,6 +49,7 @@ public class BudgetController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/id")
     public Budget singleBudget(@RequestParam(value="budget_id", defaultValue="1") String budget_id) {
         Budget result = null;
@@ -73,6 +77,7 @@ public class BudgetController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/all_budgets")
     public List<Budget> getAllBudgetsForUser(@RequestParam(value="user_id") String user_id) {
 //        List<Budget> result = new ArrayList<>();
@@ -109,6 +114,7 @@ public class BudgetController {
         return result;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/user_id")
     public Budget budgetByUserId(@RequestParam(value="user_id") String user_id) {
 //        Budget result = null;

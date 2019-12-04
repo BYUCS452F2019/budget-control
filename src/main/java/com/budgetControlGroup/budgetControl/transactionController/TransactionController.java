@@ -5,6 +5,7 @@ import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetDao;
 import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.CategoryDao;
 import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.TransactionDao;
 import com.budgetControlGroup.budgetControl.dataAccess.TransactionDAO;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +14,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/transaction")
 @RestController
 public class TransactionController {
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("")
     public List<Transaction> getTransactions(int userId){
         //TODO: eventually get the logged in user id
@@ -29,6 +32,7 @@ public class TransactionController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/budgets")
     public List<Budget> getBudgets(@RequestParam(value="user_id", defaultValue="1") String userId){
         BudgetDao dao = new BudgetDao();
@@ -40,6 +44,7 @@ public class TransactionController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/categories")
     public List<Category> getCategories(@RequestParam(value="user_id", defaultValue="1") String userId){
         CategoryDao dao = new CategoryDao();
@@ -51,6 +56,7 @@ public class TransactionController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/id")
     public List<Transaction> getTransactions(@RequestParam(value="user_id", defaultValue="1") String userId){
 //        TransactionDAO dao = new TransactionDAO();
@@ -69,6 +75,7 @@ public class TransactionController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("/add")
     public TransactionResult addTransaction(@RequestParam(value="user_id") String userId, @RequestParam(value="budget_id") String budgetId, @RequestParam(value="cat_id") String catId, @RequestParam(value="amount") String amount, @RequestParam(value="date") String date, @RequestParam(value="description") String description){
         TransactionRequest incomingTransaction = new TransactionRequest(Integer.parseInt(userId), Integer.parseInt(budgetId), Integer.parseInt(catId), amount, date, description);
