@@ -34,6 +34,7 @@ export class TransactionViewComponent implements OnInit {
   onSubmit(){
     console.log(this.addForm.value);
     this.transaction = this.addForm.value;
+    this.transaction.user_id = String(this.globals.user.userId);
     this.addRealTransaction(this.transaction);
     this.revert();
   }
