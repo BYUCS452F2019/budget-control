@@ -12,7 +12,8 @@ import { Category } from '../classes/category'
   providedIn: 'root'
 })
 export class TransactionService {
-  getServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/id?user_id='
+  //getServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/id?user_id='
+  getServerUrl: string = 'http://localhost:8080/transaction/id?user_id='
   getBudgetsUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/budgets?user_id='
   getCategoriesUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/categories?user_id='
   postServerUrl: string = 'http://ec2-13-58-63-23.us-east-2.compute.amazonaws.com:8080/transaction/add?user_id='

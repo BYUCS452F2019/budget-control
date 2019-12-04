@@ -30,7 +30,7 @@ public class BudgetCreateController {
     @RequestMapping(method = RequestMethod.POST, value="/CatCreate")
     public Category_List create_cat(@RequestBody Category_List cats) {
         System.out.println("------Here in the cat create endpoint method----\n");
-        cats.setUser(3);
+        //cats.setUser(3);
         System.out.println(cats.toString());
         System.out.println("---------Leaving create_cat method-------\n\n\n\n\n");
         budgetCreateWorkflow.create_cat(cats);
