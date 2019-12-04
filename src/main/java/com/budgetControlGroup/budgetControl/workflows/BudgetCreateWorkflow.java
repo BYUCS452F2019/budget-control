@@ -4,6 +4,9 @@ import com.budgetControlGroup.budgetControl.Models.Budget;
 import com.budgetControlGroup.budgetControl.Models.Budget_Item;
 import com.budgetControlGroup.budgetControl.Models.Category;
 import com.budgetControlGroup.budgetControl.Models.Category_List;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetDao;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.BudgetItemDao;
+import com.budgetControlGroup.budgetControl.dataAccess.Dynamo.CategoryDao;
 import com.budgetControlGroup.budgetControl.database.PostgresConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,24 +30,31 @@ public class BudgetCreateWorkflow {
     }
 
     public Budget create_budget(Budget budget) {
-        int result = insert(budget);
-        budget.setBudget_id(result);
+        //int result = insert(budget); // relational database
+        BudgetDao b_dao = new BudgetDao();
+        b_dao.addBudget(budget);
         return budget;
     }
 
     public Category_List create_cat(Category_List cats) {
-        int user = cats.getUser();
+        int user = cats.getUser_id();
         ArrayList<String> names = cats.getNames();
         ArrayList<String> expenses = cats.getExpenses();
         ArrayList<Budget_Item> budget_items = null;
 
         for (int i = 0; i < names.size(); i++) {
             Category temp = new Category(names.get(i), user);
-            int result = insert_cat(temp);
+            CategoryDao cat_d = new CategoryDao();
+            cat_d.addCategoryItem(temp);
+            int result = 0;
+            //int result = insert_cat(temp); // relational database
             System.out.println("In the create cat in workflow after insert cat method result is:");
             System.out.println(result);
             Budget_Item item_b = new Budget_Item(cats.getBudget_id(), result, expenses.get(i));
-            int item_result = insert_item(item_b);
+            BudgetItemDao b_dao = new BudgetItemDao();
+            b_dao.addBudgetItem(item_b);
+            int item_result = 0;
+            //int item_result = insert_item(item_b); // for relation database
             System.out.println("In the create cat in workflow after insert item method result is:");
             System.out.println(item_result);
         }

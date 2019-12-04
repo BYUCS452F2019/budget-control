@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Category_List {
 
-    private int user;
+    private int user_id;
     private int budget_id;
     private ArrayList<String> names;
     private ArrayList<String> expenses;
@@ -28,12 +28,12 @@ public class Category_List {
     public ArrayList<String> getExpenses() {
         return expenses;
     }
-    public int getUser() {
-        return user;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
 
@@ -48,7 +48,7 @@ public class Category_List {
     @Override
     public String toString() {
         return "Category_List{" +
-                "user=" + user +
+                "user=" + user_id +
                 ", budget_id=" + budget_id +
                 ", names=" + names +
                 ", expenses=" + expenses +

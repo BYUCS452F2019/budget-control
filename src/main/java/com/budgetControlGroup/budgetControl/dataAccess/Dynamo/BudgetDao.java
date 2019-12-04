@@ -34,6 +34,7 @@ public class BudgetDao {
     public void addBudget(Budget budget) {  //I am ignoring the budget.budgetId value on the incoming object and assigning it inside this function
         try {
             int newBudgetId = getLastBudgetId() + 1;
+            budget.setBudget_id(newBudgetId);
             Item item = new Item().withPrimaryKey(USER_ID_ATTRIBUTE, budget.getUser_id(), BUDGET_ID_ATTRIBUTE, newBudgetId)
                     .withString(BUDGET_NAME_ATTRIBUTE, budget.getName())
                     .withString(START_DATE_ATTRIBUTE, budget.getStart_date())
